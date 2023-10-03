@@ -20,18 +20,11 @@ const - ключове слово для створення констант
 
 */
 
-let box = 5;
-/* Створи змінну з ім'ям box і поклади в неї 5*/
-
-/// а вот на цьому етапі в box все ще число 5
+let box;
+box = 5;
 
 
-box = 10;
 
-/////// вот тут box має число 10
-
-
-box = "text";
 
 
 
@@ -52,24 +45,9 @@ typeof
 */
 
 
-box = true;
 
+const userName; /// ERROR!
 
-let a = 5;
+userName = 'Rick';
 
-
-
-
-/* Naming (називання) змінних
-
-Назва змінної має пояснювати, для чого вона є або що всередині
-В js використовуємо camelCase
-
-let userInputValue;
-let userName;
-let userAvatarURL;
-
-*/
-
-
-
+const PI = 3.14;
