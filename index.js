@@ -1,25 +1,47 @@
-let age = 20;
-// "Вам ... років"
-let consoleMessage;
+/*
+Логічне І  (&&)
 
+Результат - перший операнд, який був false, або останній операнд, якщо всі були true
+*/
 
-consoleMessage = 'Вам ' + age + ' років'; 
+let age = 30;
 
-console.log(consoleMessage);
-console.log('another console')
-
-//console.log('hello');
-
+// потрібно дізнатись, чи вік користувача в діапазоні від 20 до 40 років
 
 /*
-Створити змінну result = 4;
-Вивести на консоль фразу:
-"2 + 2 = ..."
+age >= 20  &&  age <= 40
+true            true            === true
+false           true            === false
+true            false           === false
+false           false           === false
 
+Логічне І (AND) виконує всі умови, якщо всі вони - true, то результатом буде true
+Якщо хоч хтось з операндів - false, то результатом буде false
+
+Якщо операнд буде не Boolean, то він автоматично конвертується для порівняння в Boolean
+*/
+
+/*
+Логічне АБО (||)
+
+Результат - повертає перший true-операнд, або останній false, якщо всі були false
+*/
+
+
+false || null || undefined
+
+/*
+age >= 20  ||  age <= 40
+true            true        === true
+false           true        === true
+true            false       === true
+false           false       === false
 
 */
 
 
-let result = 2+2;
-let consoleMessage2 = '2 + 2 = ' +result;
-console.log(consoleMessage2); 
+let userName = 0;
+
+let consoleMessage = 'Привіт, ' + (userName || 'Аноним');
+
+console.log(consoleMessage);
