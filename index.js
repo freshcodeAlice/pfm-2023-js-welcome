@@ -77,11 +77,10 @@ isNaN('a') // true
 
 */
 
-if (userNumber % 2 === 0) {
-    console.log('Це парне число');
-} else if (userNumber % 2 === 1) {
+if (isNaN(userNumber)) {
+    console.log('Ви ввели не число')
+} else if (userNumber % 2) {
     console.log('Це непарне число')
 } else {
-    console.log('Ви ввели не число')
-
+    console.log('Це парне число');
 }
