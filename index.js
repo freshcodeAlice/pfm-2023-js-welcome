@@ -1,26 +1,23 @@
+/*  Оператор if   */
+
 /*
-Модальні вікна
 
-alert(message) - Повідомляє користувача про message
-prompt(message) - Запитує message і повертає результат (ЯКИЙ ЗАВЖДИ Є РЯДКОМ)
-confirm(message) - Повідомляє message і користувач натискає Ok або Cancel (відповідно резльтутатом виклику буде true або false)
-
+if (умова, яка має повернути логічне значення) {
+    блок коду, який виконується, якщо умова = true
+}
 
 */
 
 
-//let result = prompt('Скільки вам років?');
+let sum = 5;
 
-//alert(Number(result));
+if (2+2 === sum) {
+    console.log('two plus two is really four!');
+}
 
 
-/*
-Спитати у користувача, скільки місяців він вивчає javascript
-Вивести в консоль фразу "Я вивчаю javascript .... місяців"
+/////
+console.log('another console for checking')
 
-*/
 
-let howMuchTime = prompt('Скільки місяців ви вивчаєте javascript?');
-let result2 = 'Я вивчаю javascript '+ howMuchTime + ' місяців';
-
-console.log(result2);
+////
