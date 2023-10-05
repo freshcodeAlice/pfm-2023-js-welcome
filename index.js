@@ -9,6 +9,18 @@ confirm(message) - Повідомляє message і користувач нати
 */
 
 
-let result = prompt('Скільки вам років?');
+//let result = prompt('Скільки вам років?');
 
-alert(Number(result));
+//alert(Number(result));
+
+
+/*
+Спитати у користувача, скільки місяців він вивчає javascript
+Вивести в консоль фразу "Я вивчаю javascript .... місяців"
+
+*/
+
+let howMuchTime = prompt('Скільки місяців ви вивчаєте javascript?');
+let result2 = 'Я вивчаю javascript '+ howMuchTime + ' місяців';
+
+console.log(result2);
