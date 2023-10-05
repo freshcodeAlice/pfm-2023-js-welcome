@@ -45,6 +45,9 @@ else {
 
 */
 
+
+/*
+
 if (userNumber > 0) {
     alert('Це додатнє число')
 } else if (userNumber === 0) {
@@ -53,7 +56,9 @@ if (userNumber > 0) {
     alert('Це від\'ємне число')
 } else {
     alert('Ви ввели не число')
-} 
+}
+
+*/
 
 ////////////
 
@@ -62,3 +67,21 @@ isNaN('3') // false
 isNaN(null) // false
 isNaN(undefined) //true
 isNaN('a') // true
+
+
+
+
+/*
+Запитати у користувача число. Якщо воно парне - вивести в консоль, що воно парне
+Якщо непарне - вивести, що непарне.
+
+*/
+
+if (userNumber % 2 === 0) {
+    console.log('Це парне число');
+} else if (userNumber % 2 === 1) {
+    console.log('Це непарне число')
+} else {
+    console.log('Ви ввели не число')
+
+}
