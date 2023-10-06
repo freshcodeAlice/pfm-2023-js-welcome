@@ -157,28 +157,6 @@ function getSquareOfCircle (radius) {
 */
 
 
-function calculator() {
-    let num1 = Number(prompt('Введіть перше число'));
-    let num2 = Number(prompt('Введіть друге число'));
-    let action = prompt('Введіть дію: +, -, *, /');
-
-    let result = null;
-
-    if(action === '+') {
-        result = sum(num1, num2);
-    } else if(action === '-') {
-        result = sub(num1, num2);
-    } else if(action === '*') {
-        result = multy(num1, num2);
-    } else if (action === '/') {
-        result = div(num1, num2);
-    } else {
-        alert('Неправильна дія');
-        return;
-    }
-
-    alert('Результат = '+result);
-}
 
 function sum(num1, num2) {
     return num1 + num2;
@@ -194,4 +172,83 @@ function multy(num1, num2) {
 
 function div(num1, num2) {
     return num1 / num2;
+}
+
+
+
+/*
+
+SWITCH-CASE
+
+switch (значення, за яким ми маємо "перемикатися") {
+    case "значення 1": {
+        робимо якусь дію
+    }
+    case "значення 2": {
+        робимо якусь іншу дію
+    }
+    case "значення 3": {
+        робимо якусь дію
+    }
+    case "значення 4": {
+        робимо якусь дію
+    }
+    default: {
+        робимо якусь дію, якщо жодне значення не підійшло
+    }
+}
+
+
+*/
+
+
+
+
+function calculator() {
+    debugger;
+    let num1 = Number(prompt('Введіть перше число'));
+    let num2 = Number(prompt('Введіть друге число'));
+    let action = prompt('Введіть дію: +, -, *, /');
+
+    let result = null;
+
+    // if(action === '+') {
+    //     result = sum(num1, num2);
+    // } else if(action === '-') {
+    //     result = sub(num1, num2);
+    // } else if(action === '*') {
+    //     result = multy(num1, num2);
+    // } else if (action === '/') {
+    //     result = div(num1, num2);
+    // } else {
+    //     alert('Неправильна дія');
+    //     return;
+    // }
+
+
+    switch (action) {
+        case '+': {
+            result = sum(num1, num2);
+            break;
+        }
+        case '-': {
+            result = sub(num1, num2);
+            break;
+        }
+        case '*': {
+            result = multy(num1, num2);
+            break;
+        }
+        case '/': {
+            result = div(num1, num2);
+            break;
+        }
+        default: {
+            alert('Неправильна дія');
+        }
+    }
+
+
+
+    alert('Результат = '+result);
 }
