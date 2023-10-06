@@ -92,3 +92,106 @@ console.log(getSquare(4))
 Function declaration можуть бути доступні до виклику з будь-якого місця коду
 Function expression - тільки після того, як вони були визначені
 */
+
+
+
+/*
+Практика:
+Написати функцію, яка приймає два числа і повертає максимальне з них
+
+
+*/
+
+
+function getMax(num1, num2) {
+    if (num1 > num2) {
+        return num1
+    }
+    return num2
+}
+
+
+/*
+Написати функцію, яка перевіряє парність числа
+isEven
+
+*/
+
+function isEven(number) {
+
+    return number % 2 === 0
+
+}
+
+let arrowIsEven = num => num % 2 === 0;
+
+
+
+/*
+Написати функцію, яка приймає на вхід радіус і повертає площу круга
+S = pi * r**2
+*/
+
+
+function getSquareOfCircle (radius) {
+    const PI = 3.14;
+    return PI * radius **2;
+}
+
+
+
+
+/*
+Таска 3: зробити калькулятор
+
+1. Запитати у користувача послідовно два числа.
+2. Запитати у користувача символ дії: *, /, + -
+
+4. Написати 4 функції (на кожну дію по одній)
+
+В результаті має бути 5 функції
+
+
+Перевірку символів реалізувати через if-else if -else
+
+*/
+
+
+function calculator() {
+    let num1 = Number(prompt('Введіть перше число'));
+    let num2 = Number(prompt('Введіть друге число'));
+    let action = prompt('Введіть дію: +, -, *, /');
+
+    let result = null;
+
+    if(action === '+') {
+        result = sum(num1, num2);
+    } else if(action === '-') {
+        result = sub(num1, num2);
+    } else if(action === '*') {
+        result = multy(num1, num2);
+    } else if (action === '/') {
+        result = div(num1, num2);
+    } else {
+        alert('Неправильна дія');
+        return;
+    }
+
+    alert('Результат = '+result);
+}
+
+function sum(num1, num2) {
+    return num1 + num2;
+}
+
+function sub(num1, num2) {
+    return num1 - num2;
+}
+
+function multy(num1, num2) {
+    return num1 * num2;
+}
+
+function div(num1, num2) {
+    return num1 / num2;
+}
