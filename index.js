@@ -1,254 +1,111 @@
-/* Функція  
-
-Функція - це ізольований блок коду, який працює незалежно від основного коду, має власну область видимості
-
-Принцип єдиної відповідальності
-single-responsibility principle
-Функція має виконувати одну роботу
-
-*/
-
 /*
+1. Площа квадрата
 
-Function declaration
-
-Визначення функції (її об'явлення)
-
-function ім'я функції(аргументи) {
-    блок коду функції
-} 
+2. Квадратне рівняння
 
 
-Виклик функції:
-ім'я функції(аргументи)
+3. Меню
 
 */
 
-let resultOfFunction = getSumOfTwoNumber(2);
 
-function getSumOfTwoNumber(num1, num2 = 1) { 
-    let result = num1 + num2;
-    return result;
+//1
+
+function getSquareOfSquare(a) {
+    return a*a;
 }
 
 
-console.log('Result of function word is ' + resultOfFunction);
-
- /*
-Function expression (Функціональний вираз)
-
-let fun1 = function (аргументи) {
-    тіло функції
-}
-
-Виклик функції
-fun1()
-
- */
-
-
-let getDivide = function (num1, num2) {
-    return num1 / num2
-}
-
-getDivide(4, 2);
-
-
-
-/*
-
-Arrow function
-
-
-let funName = (аргументи) => {
-    тіло функції
-}
-
-Вона може бути ще менше:
-
-let getSquare = x => x*x
-
-
-getSquare(3)
-
-*/
-
-
-
-
-let getSquare = x => x**2;
-
-
-console.log(getSquare(4))
-
-
-
-
-/// Hoisting (підняття)
-/*
-Процес "перегляду" коду інтерпретатором до виконання коду (до інтерпретації).
-При цьому всі змінні та об'єкти створюються в пам'яті, але безспосередньо вирази та виклики функцій не обчислюються, і змінні кладеться undefined
-
-Function declaration можуть бути доступні до виклику з будь-якого місця коду
-Function expression - тільки після того, як вони були визначені
-*/
-
-
-
-/*
-Практика:
-Написати функцію, яка приймає два числа і повертає максимальне з них
-
-
-*/
-
-
-function getMax(num1, num2) {
-    if (num1 > num2) {
-        return num1
+//2
+function getRootsOfQuadraticEquation(a, b, c) {
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        console.log('Невірні вхідні дані'); /// краще повернути помилку
+        return false;
     }
-    return num2
-}
-
-
-/*
-Написати функцію, яка перевіряє парність числа
-isEven
-
-*/
-
-function isEven(number) {
-
-    return number % 2 === 0
-
-}
-
-let arrowIsEven = num => num % 2 === 0;
-
-
-
-/*
-Написати функцію, яка приймає на вхід радіус і повертає площу круга
-S = pi * r**2
-*/
-
-
-function getSquareOfCircle (radius) {
-    const PI = 3.14;
-    return PI * radius **2;
-}
-
-
-
-
-/*
-Таска 3: зробити калькулятор
-
-1. Запитати у користувача послідовно два числа.
-2. Запитати у користувача символ дії: *, /, + -
-
-4. Написати 4 функції (на кожну дію по одній)
-
-В результаті має бути 5 функції
-
-
-Перевірку символів реалізувати через if-else if -else
-
-*/
-
-
-
-function sum(num1, num2) {
-    return num1 + num2;
-}
-
-function sub(num1, num2) {
-    return num1 - num2;
-}
-
-function multy(num1, num2) {
-    return num1 * num2;
-}
-
-function div(num1, num2) {
-    return num1 / num2;
-}
-
-
-
-/*
-
-SWITCH-CASE
-
-switch (значення, за яким ми маємо "перемикатися") {
-    case "значення 1": {
-        робимо якусь дію
-    }
-    case "значення 2": {
-        робимо якусь іншу дію
-    }
-    case "значення 3": {
-        робимо якусь дію
-    }
-    case "значення 4": {
-        робимо якусь дію
-    }
-    default: {
-        робимо якусь дію, якщо жодне значення не підійшло
+    let d = b**2 - 4*a*c;
+    if (d < 0) {
+        console.log('Рівняння не має коренів'); // повернути null
+    } else if (d === 0) {
+        let x = -b / 2*a;
+        console.log('Рівняння має корінь ', x); // повернути одне значення
+    } else {
+        let x1 = (-b + Math.sqrt(d)) / (2 * a);
+        let x2 = (-b - Math.sqrt(d)) / (2 * a);
+        console.log('х1 = ', x1);  // повернути два значення
+        console.log('x2 = ', x2);
     }
 }
 
 
-*/
 
+//3
 
-
-
-function calculator() {
+function getMenu() {
     debugger;
-    let num1 = Number(prompt('Введіть перше число'));
-    let num2 = Number(prompt('Введіть друге число'));
-    let action = prompt('Введіть дію: +, -, *, /');
-
-    let result = null;
-
-    // if(action === '+') {
-    //     result = sum(num1, num2);
-    // } else if(action === '-') {
-    //     result = sub(num1, num2);
-    // } else if(action === '*') {
-    //     result = multy(num1, num2);
-    // } else if (action === '/') {
-    //     result = div(num1, num2);
-    // } else {
-    //     alert('Неправильна дія');
-    //     return;
-    // }
-
-
-    switch (action) {
-        case '+': {
-            result = sum(num1, num2);
+    let userOption = prompt('Виберіть напій: \n 1 - Сік\n 2 - Вода\n 3 - Чай');
+    switch(userOption) {
+        case '1': {
+            alert('Ви обрали сік');
             break;
         }
-        case '-': {
-            result = sub(num1, num2);
+        case '2': {
+            alert('Ви обрали воду');
             break;
         }
-        case '*': {
-            result = multy(num1, num2);
+        case '3': {
+            alert('Ви обрали чай');
             break;
         }
-        case '/': {
-            result = div(num1, num2);
+        case null:
+        case '': 
+        {
+            alert('Ви нічого не обрали');
             break;
         }
         default: {
-            alert('Неправильна дія');
+            alert('Такого напою не подаєм')
         }
     }
+}
 
 
 
-    alert('Результат = '+result);
+
+///// Приклад: Запросити у користувача номер місяця
+// Якщо вказаний місяць - це січень, або лютий, або грудень - вивести "зима"
+// Якщо березень, квітень, травень - вивести "весна"
+// Якщо червень, липень, серпень - вивести "літо"
+// Якщо весерень, жовтень, листопад - вивести "осінь"
+
+function getSeason() {
+    let monthNumber = Number(prompt('Введіть номер місяця'));
+    switch(monthNumber) {
+        case 1:
+        case 2:
+        case 12: {
+            alert('Зима');
+            break;
+        }
+        case 3:
+        case 4: 
+        case 5: {
+            alert('Весна');
+            break;
+        }
+        case 6:
+        case 7:
+        case 8: {
+            alert('Літо');
+            break
+        }
+        case 9:
+        case 10:
+        case 11: {
+            alert('Осінь');
+            break
+        }
+        default: {
+            alert('Такого сезону нема')
+        }
+    }
 }
