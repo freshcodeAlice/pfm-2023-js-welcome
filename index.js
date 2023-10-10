@@ -144,3 +144,44 @@ let result = 1;
 for (let counter = 1; counter <= factNumber; counter++) {
     result *= counter;
 }
+
+
+/*
+Вивести на консоль всі парні числа в діапазоні від 0 до 10 (включно)
+
+*/
+
+for (let i=10; i <= 10; i++) { // i - iterator
+    if(i % 2 === 0) {
+        console.log(i)
+    }
+}
+
+
+/*
+Написати код, який запитує у користувача два числа і якщо друге більше ніж перше - повертає суму всіх чисел в діапазоні між цими двома числами (включно з граничними значеннями)
+
+
+*/
+
+function getSumOfRange() {
+    let num1 = Number(prompt('введіть перше число')); // 5
+    let num2 = Number(prompt('Введіть друге число')); // 10
+    
+    
+    if (num2 > num1) {
+        let res = getSum(num1, num2);
+        console.log(res);
+    } else {
+        console.log('Неправильні вхідні дані')
+    }
+}
+
+
+function getSum(num1, num2) { //Pure function
+    let sum = 0;
+    for (let i = num1; i <= num2; i++) {
+        sum = sum + i;
+    }
+    return sum;
+}
