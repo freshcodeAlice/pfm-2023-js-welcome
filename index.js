@@ -1,74 +1,152 @@
-/* Цикли */
-
-
+/* Об'єкти */
 
 /*
-Написати функцію, яка приймає у користувача розмір (dimension) і малює будь-яким символом квадрат заданого розміру
+Number
+String
+Boolean
+null
+undefined
 
+BigInt
+Symbol
 
 */
 
-let userPrompt = Number(prompt('Введіть розмір фігури'));
+/*
+Структура даних - це форма організації даних
 
-//drawSquare(userPrompt);
+Структури даних: змінна, об'єкт, масив, список
 
-drawEmptySquare(userPrompt)
+*/
 
-function drawSquare(dimension) {
-        let str = '';
 
-    for(let j = 0; j < dimension; j++) {
-        for(let i=0; i < dimension; i++) {
+/* 
+Об'єкт - самостійна структурна одиниця, яка містить властивості(значення) та методи
 
-            str += '* ';
-        }
-        str += '\n'
-    }
-        
-    console.log(str);
+Ключ: значення
+*/
 
+let value = 5;
+
+
+function someFun() { // функція
+    /// щось робимо
 }
 
 
-/* Намалювати квадрат пустим */
-
-function drawEmptySquare(dimension) {
-    let str = '';
-
-for(let j = 0; j < dimension; j++) {
-    for(let i=0; i < dimension; i++) {
-        
-        if(j === 0 || j === dimension - 1 || i === 0 || i === dimension - 1) { // якщо поточна ітерація циклу - це рамка, то малюємо зірочку
-            str += '* ';
-        } else {
-            str += '  ';         // інакше - малюємо пробіл
-        }
-
-
-    }
-    str += '\n'
-}
-    
-console.log(str);
-
+let monitor = {
+    diagonal: 27,
+    brightness: 200,
+    aspectRatio: '16:9',
+    on: function() {   // метод об'єкта
+        console.log('Наш монітор працює!')
+    },   // trailing coma
 }
 
 
 /*
-HomeTask 1:
+Практика: описати об'єкт Кота.
+Кіт має наступні властивості:
+- ім'я
+- колір хутра
+- колір очей
+- вага
+- вік
 
-Намалювати трикутник заданого користувачем розміру
+Кіт вміє:
+- нявкати ("Мяу")
+- бігати ("Тигидик")
+- їсти ("Ням-ням-ням")
 
-*
-**
-***
-****
-*****
-******
-
-HomeTask 2:
-Намалювати пустий квадрат з діагоналлю (зліва зверху - до права низу)
-
-Задачка з *: Зробити квадрат зі зворотньою діагоналлю (з правого верхнього до лівого нижнього)
 
 */
+
+
+
+let cat = {
+    name: 'Murzik',
+    color: 'red',
+    eyeColor: 'grey',
+    weight: 10,
+    age: 5,
+    meow: function () {
+        console.log('MEOOOOWWWWWWw')
+    },
+    run: function () {
+        console.log('ТИГДИК-ТИГДИК')
+    },
+    eat: function() {
+        console.log('Ням-ням-ням')
+    },
+    girlfriend: {
+        name: 'Murka',
+        color: 'grey',
+        eyeColor: 'green'
+    }
+}
+
+//Отримання значення з об'єкта   ---- Read
+cat.color
+
+console.log(cat);
+
+///  Десь отут котику стукнуло 6 рочків
+
+cat.age = cat.age + 1;   /// Update
+//cat.age++;
+
+console.log(cat);
+
+
+//// тепер хочу додати коту нову властивість
+
+cat.favouriteFood = 'tune';  /// create
+
+/// видалити властивість age
+
+
+delete cat.age
+
+
+
+
+/*
+Описати об'єкт квітки
+Квітка має властивість:
+- різновид
+- колір
+- висота
+
+Квітка вміє 
+- пити
+- рости
+
+Потім після опису квітки
+1. Додати метод "розквітати"
+2. Додати до висоти 10см
+3. Видалити властивість "колір"
+
+
+*/ 
+
+
+let flower = {
+    species: 'astra',
+    color: 'red',
+    height: 30,
+    drink: function () {
+        console.log('glglglg')
+    },
+
+}
+
+
+flower.bloom = function () {
+    console.log('Подивіться на ці квіточки')
+};
+
+
+flower.height = flower.height + 10;
+
+
+delete flower.color;
