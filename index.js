@@ -137,7 +137,12 @@ let flower = {
     drink: function () {
         console.log('glglglg')
     },
-
+    grow() {
+        console.log('Im growing')
+    },
+    die: () => {
+        console.log('im dying')
+    }
 }
 
 
@@ -150,3 +155,40 @@ flower.height = flower.height + 10;
 
 
 delete flower.color;
+
+
+
+
+
+/*
+Особливості об'єктів
+
+Об'єкти зберігаються за посиланням
+
+*/
+
+
+let obj = {
+    a: 5,
+    b: 10
+}
+
+
+let obj2 = {
+    a: 5,
+    b: 10
+}
+
+
+/*
+Функції - це теж об'єкти
+
+*/
+
+let fun1 = function() {
+    console.log("Я супер-функція")
+}
+
+let fun2 = fun1;
+
+
