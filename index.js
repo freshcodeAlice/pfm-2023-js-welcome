@@ -1,28 +1,43 @@
-/* Шаблонні рядки */
 
-let sum = (a, b) => a+b;
+function sayHello(user) {
+    let hello = '';
+    if (user.age > 5 && user.age < 18) {
+        hello = 'hi'
+    } else if(user.age > 18 && user.age < 30) {
+        hello = 'hello'
+    } else {
+        hello = 'Good afternoon'
+    }
+    console.log(`${hello}, ${user.name} ${user.lastName}`);
+}
 
-let str = `3+3 === ${sum(3, 3)}`;
-console.log(str);
+const user = {
+    name: 'John',
+    lastName: 'Doe',
+    age: 20
+}
+
+sayHello(user);
 
 
-/*
-Використати цикл і вивести на консоль таблицю множення для 2 і 3
+function getBan(userObj) {
+    userObj.banned = true;  // мутація об'єкта - ми змінили об'єкт в пам'яті, бо за посиланням можемо робити з об'єктом все що завгодно
+}
 
-2*1 = 2
-2*2 = 4
-2*3 = 6
-...
-3*1 = 3
-3*2 = 6
-....
-3*10 = 30
+
+/* const 
+
+Константи 
 
 */
 
 
-for (let i = 2; i <= 3; i++) {
-    for(let j = 1; j <= 10; j++) {
-        console.log(`${i} * ${j} = ${i*j}`)
-    }
+let a = 5;
+a = 10;
+
+const b = 10;
+//b = 15; // TypeError: Assignment to constant variable.
+
+const obj = {
+    a: 'value'
 }
