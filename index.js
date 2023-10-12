@@ -1,43 +1,29 @@
-
-function sayHello(user) {
-    let hello = '';
-    if (user.age > 5 && user.age < 18) {
-        hello = 'hi'
-    } else if(user.age > 18 && user.age < 30) {
-        hello = 'hello'
-    } else {
-        hello = 'Good afternoon'
-    }
-    console.log(`${hello}, ${user.name} ${user.lastName}`);
-}
-
 const user = {
-    name: 'John',
+    firstName: 'Jane',
     lastName: 'Doe',
-    age: 20
+    age: 18,
+    email: 'joe@u.jdsa',
+    favouriteFilm: 'It'
 }
 
-sayHello(user);
+/* for ... in */
+
+/*
 
 
-function getBan(userObj) {
-    userObj.banned = true;  // мутація об'єкта - ми змінили об'єкт в пам'яті, бо за посиланням можемо робити з об'єктом все що завгодно
-}
-
-
-/* const 
-
-Константи 
-
+let key = 'firstName';
+console.log(user[key]);
+key = 'lastName';
+console.log(user[key]);
+key = 'age';
+console.log(user[key]);
+key = 'email';
+console.log(user[key]);
+key = 'favouriteFilm';
+console.log(user[key]);
 */
 
+ for (const key in user) {  // key на кожній  ітерації циклу отримує значення ключа об'єкта
+    console.log(user[key]);
+ }
 
-let a = 5;
-a = 10;
-
-const b = 10;
-//b = 15; // TypeError: Assignment to constant variable.
-
-const obj = {
-    a: 'value'
-}
