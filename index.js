@@ -1,111 +1,72 @@
-const user = {
-    firstName: 'Jane',
-    lastName: 'Doe',
-    age: 18,
-    email: 'joe@u.jdsa',
-    favouriteFilm: 'It'
-}
+/// this
 
-/* for ... in */
-
-/*
-
-
-let key = 'firstName';
-console.log(user[key]);
-key = 'lastName';
-console.log(user[key]);
-key = 'age';
-console.log(user[key]);
-key = 'email';
-console.log(user[key]);
-key = 'favouriteFilm';
-console.log(user[key]);
-*/
-/*
- for (const key in user) {  // key на кожній  ітерації циклу отримує значення ключа об'єкта
-    console.log(user[key]); /// age - 18
- }
- */
-
-/*
-Написати функцію, яка приймає об'єкт юзера і виводить всю інформацію про нього у вигляді:
-firstName: Jane
-lastName: Doe
-age: 18
-email: joe@u.jdsa
-favouriteFilm: It
-
-
-*/
-
-
-
-function printUserInfo(user) {
-    for (const key in user) {  // key на кожній  ітерації циклу отримує значення ключа об'єкта
-        console.log(`${key}: ${user[key]}`); /// age - 18
-     }
-}
-
-printUserInfo(user)
-
-/*
-Написати функцію, яка приймає об'єкт, що містить такі дані:
-
-
-let obj = {
-    a: 1,
-    b: 'hello',
-    v: true,
-    c: 10,
-    d: 20
-}
-
-Повернути з функції суму числових значень
-
-*/
-
-
-let obj = {
-    a: 1,
-    b: 'hello',
-    v: true,
-    c: 10,
-    d: 20
-}
-
-
-function getSumOfNumberValues(obj) {
-    let sum = 0;
-    for (const key in obj) {
-        if(typeof obj[key] === 'number') {
-            sum += obj[key];
-        }
-
+let cat = {
+    name: 'Murzik',
+    age: 8,
+    color: 'red',
+    eat: function() {
+        console.log(`${this.name} Ням-ням`)
+    },
+    meow: function() {
+        // console.log(this);
+        console.log(`${this.name} каже Мяу`)
     }
-    return sum
+}
+
+/*
+Ключове слово this вказує на об'єкт, який є контекстом виконання методу 
+ 
+*/
+
+/*
+Створіть об'єкт, що описує квітку
+Квітка має певну висоту
+height: 20
+
+Додати квітці метод grow(), який збільшує властивість висоти на 10см
+
+*/
+
+const flower = {
+    height: 20,
+    color: 'red',
+    grow: function() {
+        this.height += 10;
+        return this
+    }
 }
 
 
 /*
-Таска на обчислювані властивості
+Chaining - (від chain - ланцюг) - організація коду таким чином, щоби було доступно виклик методів ланцюжковим способом:
 
+flower.grow().grow()
 
 */
 
 
+/*
+Написати об'єкт ladder
+Об'єкт має властивість currentStep
+
+Два методи:
+up() - піднімається на сходинку вверх (інкремент current)
+down() - декремент (спускається на сходинку вниз)
+
+Реалізувати методи таким чином, щоби був доступний ланцюжковий спосіб виклику
 
 
-function getPlan() {
-    const weekPlan = {
-        Mon: 'go to work',
-        Tue: 'friend party',
-        Wed: 'dantist',
-        Thu: 'homework',
-        Fri: 'Walk in the park',
-        Sat: 'lie in bed'
+
+*/
+
+const ladder = {
+    currentStep: 0,
+    up: function(){
+        this.currentStep++;
+        return this;
+    },
+    down: function() {
+        this.currentStep--;
+        return this;
     }
-    // яка запитує у користувача день тижня, який цікавить і повертає alert-ом план, який є у об'єкті
-    let userInput = prompt('Який день тижня вас цікавить?');
-    alert(weekPlan[userInput] || 'Nothing planned')
 }
