@@ -1,194 +1,88 @@
-/* Об'єкти */
+/* Об'єкти 
 
-/*
-Number
-String
-Boolean
-null
-undefined
-
-BigInt
-Symbol
+Об'єкти мають властивості та методи.
+Ключ (назва властивості) може бути тільки двох типів даних - рядок (String) або Symbol
 
 */
 
-/*
-Структура даних - це форма організації даних
-
-Структури даних: змінна, об'єкт, масив, список
-
-*/
-
-
-/* 
-Об'єкт - самостійна структурна одиниця, яка містить властивості(значення) та методи
-
-Ключ: значення
-*/
-
-let value = 5;
-
-
-function someFun() { // функція
-    /// щось робимо
+let computer = {
+    memory: 1024,
+    color: 'black',
+    monitor: {
+        width: {
+            value: 24,
+            uom: 'inch'
+        },
+        height: {
+            value: 30,
+            uom: 'inch'
+        },
+        manufacturer: {
+            name: 'Sony',
+            address: {
+                country: 'Japan',
+                city: 'Tokyo'
+            },
+        },
+    },
+    compProperty: 'some value',
+    on: function() {
+        console.log('This comp is on')
+    }
 }
 
 
-let monitor = {
-    diagonal: 27,
-    brightness: 200,
-    aspectRatio: '16:9',
-    on: function() {   // метод об'єкта
-        console.log('Наш монітор працює!')
-    },   // trailing coma
-}
+computer.on();
+
+
 
 
 /*
-Практика: описати об'єкт Кота.
-Кіт має наступні властивості:
-- ім'я
-- колір хутра
-- колір очей
-- вага
-- вік
+Оператори доступу до властивостей
 
-Кіт вміє:
-- нявкати ("Мяу")
-- бігати ("Тигидик")
-- їсти ("Ням-ням-ням")
+. - доступ до властивості за її назвою
 
+computer.color
+
+[] - доступ до обчислюваної властивості 
 
 */
-
-
 
 let cat = {
-    name: 'Murzik',
-    color: 'red',
-    eyeColor: 'grey',
-    weight: 10,
-    age: 5,
-    meow: function () {
-        console.log('MEOOOOWWWWWWw')
-    },
-    run: function () {
-        console.log('ТИГДИК-ТИГДИК')
-    },
-    eat: function() {
-        console.log('Ням-ням-ням')
-    },
-    girlfriend: {
-        name: 'Murka',
-        color: 'grey',
-        eyeColor: 'green'
-    }
+    name: 'Murzik'
 }
 
-//Отримання значення з об'єкта   ---- Read
-cat.color
+let property = 'name';
 
-console.log(cat);
-
-///  Десь отут котику стукнуло 6 рочків
-
-cat.age = cat.age + 1;   /// Update
-//cat.age++;
-
-console.log(cat);
-
-
-//// тепер хочу додати коту нову властивість
-
-cat.favouriteFood = 'tune';  /// create
-
-/// видалити властивість age
-
-
-delete cat.age
-
-
+cat[property]  /// cat['name'] === cat.name
 
 
 /*
-Описати об'єкт квітки
-Квітка має властивість:
-- різновид
-- колір
-- висота
+Створити об'єкт чашки
+Чашка має властивості:
+- колір (color)
+- об'єм (volume)
+- форма (form)
 
-Квітка вміє 
-- пити
-- рости
+Маємо три змінні:
+let prop1 = 'color';
+let prop2 = 'volume';
+let prop3 = 'form';
 
-Потім після опису квітки
-1. Додати метод "розквітати"
-2. Додати до висоти 10см
-3. Видалити властивість "колір"
-
-
-*/ 
-
-
-let flower = {
-    species: 'astra',
-    color: 'red',
-    height: 30,
-    drink: function () {
-        console.log('glglglg')
-    },
-    grow() {
-        console.log('Im growing')
-    },
-    die: () => {
-        console.log('im dying')
-    }
-}
-
-
-flower.bloom = function () {
-    console.log('Подивіться на ці квіточки')
-};
-
-
-flower.height = flower.height + 10;
-
-
-delete flower.color;
-
-
-
-
-
-/*
-Особливості об'єктів
-
-Об'єкти зберігаються за посиланням
 
 */
 
 
-let obj = {
-    a: 5,
-    b: 10
+let cup = {
+    color: 'blue',
+    volume: '300ml',
+    form: 'circle',
 }
 
+let prop1 = 'color';
+let prop2 = 'volume';
+let prop3 = 'form';
 
-let obj2 = {
-    a: 5,
-    b: 10
-}
-
-
-/*
-Функції - це теж об'єкти
-
-*/
-
-let fun1 = function() {
-    console.log("Я супер-функція")
-}
-
-let fun2 = fun1;
-
-
+console.log(cup[prop1]);  /// cup.color
+console.log(cup[prop2]);  /// cup.color
+console.log(cup[prop3]);  /// cup.color
