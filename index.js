@@ -48,12 +48,14 @@ const ukr = new Country('Ukraine', 43790000, 603628);
 */
 
 
-function Car(name, maxSpeed) {
+class Car {
+    constructor(name, maxSpeed) {
     this.name = name;
     this.maxSpeed = maxSpeed;
     this.speed = 0;
+    }
 
-    this.accelerate = function(value = 0) {
+    accelerate (value = 0) {
         if (isNaN(value)){
             return false; // Error
         }
@@ -64,7 +66,7 @@ function Car(name, maxSpeed) {
         return this.speed
     }
 
-    this.deaccelerate = function (value = 0) {
+    deaccelerate (value = 0) {
         if (isNaN(value)){
             return false; // Error
         }
@@ -75,7 +77,7 @@ function Car(name, maxSpeed) {
         return this.speed
     }
 
-    this.stop = function() {
+   stop() {
         return this.speed = 0;
     }
 
