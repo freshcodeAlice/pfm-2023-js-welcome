@@ -130,7 +130,10 @@ function Car(name, maxSpeed) {
     this.maxSpeed = maxSpeed;
     this.speed = 0;
 
-    this.accelerate = function(value) {
+    this.accelerate = function(value = 0) {
+        if (isNaN(value)){
+            return false; // Error
+        }
         this.speed += value;
         if (this.speed > maxSpeed) {
             this.speed = maxSpeed;
@@ -138,7 +141,10 @@ function Car(name, maxSpeed) {
         return this.speed
     }
 
-    this.deaccelerate = function (value) {
+    this.deaccelerate = function (value = 0) {
+        if (isNaN(value)){
+            return false; // Error
+        }
         this.speed -= value;
         if (this.speed < 0){
             this.speed = 0;
