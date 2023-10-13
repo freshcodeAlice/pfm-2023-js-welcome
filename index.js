@@ -154,7 +154,9 @@ const cat3 = new Cat('Barsik', 2, 'black');
 
 //2
 
+// old prototype syntax
 
+/*
 function User(firstName, lastName, age, mail) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -171,6 +173,28 @@ function UserPrototype() {
 
 const userPrototype = new UserPrototype();
 User.prototype = userPrototype;
+*/
 
-const user1 = new User('John', 'Doe', 18, 'daasdasd');
-const user2 = new User('Jane', 'Snow', 30);
+
+
+//// new class syntax
+
+class User {
+    constructor(firstName, lastName, age, mail) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.mail = mail;
+    }
+
+    sayHello() {
+        console.log(`${this.firstName} say: "Hello"`)
+    }
+
+
+}
+
+
+const user1 = new User('John', 'Doe', 20, 'dsa@asd.asd');
+
+
