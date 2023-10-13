@@ -1,84 +1,7 @@
 /* Функції-конструктори */
 
-/*
- const cat = {
-    name: 'Murz',
-    age: 8,
-    color: 'grey',
-    meow: function() {
-        console.log('meow')
-    }
- }
 
 
- const cat2 = {
-    name: 'Murka',
-    age: 3,
-    color: 'red',
-    meow: function() {
-        console.log('meow')
-    }
- }
-
- const cat3 = {
-    name: 'Barsik',
-    age: 2,
-    color: 'black',
-    meow: function() {
-        console.log('meow')
-    }
- }
-
- */
-
-/* Функція-конструктор: особливий "режим" роботи функції, при якому вона створює об'єкт за заданим шаблоном і повертає його внаслідок роботи
-
-*/
-
-function Cat(name, age, color) {
-    /// До всього-всього - ключове слово new створює новий об'єкт
-    // посилання на цей конкретний новостворений об'єкт кладеться в this
-    /// this = {}
-    this.name = name;
-    this.age = age;
-    this.color = color;
-    this.meow = function() {
-        console.log('meoooow');
-    }
-}
-
-const cat1 = new Cat('Murz', 8, 'grey');
-
-const cat2 = new Cat('Murka', 3, 'red');
-
-const cat3 = new Cat('Barsik', 2, 'black');
-
-
-/* Написати функцію-конструктор для юзера
-Властивості:
-- ім'я
-- прізвище
-- вік
-- мейл
-
-метод
-- sayHello
-*/
-
-
-function User(firstName, lastName, age, mail) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.mail = mail;
-    this.sayHello = function(){
-        console.log(`${this.firstName} say: "Hello"`)
-    }
-}
-
-
-const user1 = new User('John', 'Doe', 18, 'daasdasd');
-const user2 = new User('Jane', 'Snow', 30);
 
 
 /*
@@ -157,3 +80,97 @@ function Car(name, maxSpeed) {
     }
 
 }
+
+
+const car = new Car('lanos', 100)  // Екземпляр
+
+
+
+
+/* Прототипи */
+
+function Rabbit(name, color){
+    this.name = name;
+    this.color = color;
+
+
+}
+
+
+function RabbitLogic () {
+    this.jump = function() {
+        console.log(`${this.name} is jumping`)
+    }
+    this.eat = function() {
+        console.log(`${this.name} says nyam-nyam`);
+    }
+}
+
+
+const rabLogic = new RabbitLogic();
+
+Rabbit.prototype = rabLogic;
+
+console.log(rabLogic);
+
+const rabbit1 = new Rabbit('Ricky', 'grey');
+rabbit1.eat();
+
+rabLogic.bite = function() {
+    console.log(`${this.name} bite you!`);
+}
+
+
+/*
+Переписати котів та юзерів на 
+окремо об'єкт з даними - окремо об'єкт з методами
+і зв'язати їх прототипом
+
+*/
+
+
+
+function Cat(name, age, color) {
+    this.name = name;
+    this.age = age;
+    this.color = color;
+}
+
+function CatPrototype() {
+    this.meow = function() {
+        console.log('meoooow');
+    }
+}
+
+const catProto = new CatPrototype();
+Cat.prototype =  catProto;
+
+const cat1 = new Cat('Murz', 8, 'grey');
+
+const cat2 = new Cat('Murka', 3, 'red');
+
+const cat3 = new Cat('Barsik', 2, 'black');
+
+
+//2
+
+
+function User(firstName, lastName, age, mail) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.mail = mail;
+   
+}
+
+function UserPrototype() {
+    this.sayHello = function(){
+        console.log(`${this.firstName} say: "Hello"`)
+    }
+}
+
+const userPrototype = new UserPrototype();
+User.prototype = userPrototype;
+
+const user1 = new User('John', 'Doe', 18, 'daasdasd');
+const user2 = new User('Jane', 'Snow', 30);
