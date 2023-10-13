@@ -198,3 +198,20 @@ class User {
 const user1 = new User('John', 'Doe', 20, 'dsa@asd.asd');
 
 
+
+/* __proto__ - літерально заданий прототип для одного конкретного об'єкта */
+
+
+const cat = {
+    name: 'Murz',
+    age: 9
+}
+
+
+const catProtoObj = {
+    run() {
+        console.log('тигидик')
+    }
+}
+
+cat.__proto__ = catProtoObj;
