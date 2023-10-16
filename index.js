@@ -1,219 +1,107 @@
-/* Функції-конструктори */
+/* Масиви */
+
+const array = {
+    0: 3,
+    1: 2,
+    2: 1,
+    3: 4,
+    length: 4
+}
 
 
-
+const nativeArray = [3, 2, 1, 4];
 
 
 /*
-Створити функцію-конструктор для сутності Країна
-Country
-- назва
-- population (кількість населення)
-- area (площа)
+Масив - впорядкована сукупність даних.
+В JS дані в комірках масива можуть бути різних типів.
+Нумерація з 0 (відповідно останній індекс = розмір - 1)
 
-Метод
-- щільність населення (getDensity)
-    кількість населення / площу країни
-
-*/
-
-
-function Country(name, population, area) {
-    this.name = name;
-    this.population = population;
-    this.area = area;
-    this.getDensity = function(){
-        return this.population / this.area;
-    }
-}
-
-
-const ukr = new Country('Ukraine', 43790000, 603628);
-
-
-
-/*
-Написати функцію-конструктор для авта
-- name,
-- maxSpeed
-- speed
-
-Реалізувати методи:
-- accelerate(value) - прийняти в функцію величину в km/h і збільшити поточну швидкість на вказану величину
-- deaccelerate(value) - прийняти величину і зменшити поточну швидкість
-- stop() - зупинка машини (швидкість = 0)
-
-
-
-*/
-
-
-class Car {
-    constructor(name, maxSpeed) {
-    this.name = name;
-    this.maxSpeed = maxSpeed;
-    this.speed = 0;
-    }
-
-    accelerate (value = 0) {
-        if (isNaN(value)){
-            return false; // Error
-        }
-        this.speed += value;
-        if (this.speed > maxSpeed) {
-            this.speed = maxSpeed;
-        }
-        return this.speed
-    }
-
-    deaccelerate (value = 0) {
-        if (isNaN(value)){
-            return false; // Error
-        }
-        this.speed -= value;
-        if (this.speed < 0){
-            this.speed = 0;
-        }
-        return this.speed
-    }
-
-   stop() {
-        return this.speed = 0;
-    }
-
-}
-
-
-const car = new Car('lanos', 100)  // Екземпляр
-
-
-
-
-/* Прототипи */
-
-function Rabbit(name, color){
-    this.name = name;
-    this.color = color;
-
-
-}
-
-
-function RabbitLogic () {
-    this.jump = function() {
-        console.log(`${this.name} is jumping`)
-    }
-    this.eat = function() {
-        console.log(`${this.name} says nyam-nyam`);
-    }
-}
-
-
-const rabLogic = new RabbitLogic();
-
-Rabbit.prototype = rabLogic;
-
-console.log(rabLogic);
-
-const rabbit1 = new Rabbit('Ricky', 'grey');
-rabbit1.eat();
-
-rabLogic.bite = function() {
-    console.log(`${this.name} bite you!`);
-}
-
-
-/*
-Переписати котів та юзерів на 
-окремо об'єкт з даними - окремо об'єкт з методами
-і зв'язати їх прототипом
+Будь-який масив - екземпляр глобального вбудованого об'єкта Array (який містить купу корисних методів для роботи)
 
 */
 
 
 
-function Cat(name, age, color) {
-    this.name = name;
-    this.age = age;
-    this.color = color;
-}
-
-function CatPrototype() {
-    this.meow = function() {
-        console.log('meoooow');
-    }
-}
-
-const catProto = new CatPrototype();
-Cat.prototype =  catProto;
-
-const cat1 = new Cat('Murz', 8, 'grey');
-
-const cat2 = new Cat('Murka', 3, 'red');
-
-const cat3 = new Cat('Barsik', 2, 'black');
-
-
-//2
-
-// old prototype syntax
-
 /*
-function User(firstName, lastName, age, mail) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.mail = mail;
-   
-}
+Таска: дан масив [5, 4, 3, 2, 1]
+Вивести на консоль всі елементи масиву програмним методом
 
-function UserPrototype() {
-    this.sayHello = function(){
-        console.log(`${this.firstName} say: "Hello"`)
-    }
-}
-
-const userPrototype = new UserPrototype();
-User.prototype = userPrototype;
 */
 
 
+const newArr = [5, 4, 3, 2, 1];
 
-//// new class syntax
-
-class User {
-    constructor(firstName, lastName, age, mail) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.mail = mail;
-    }
-
-    sayHello() {
-        console.log(`${this.firstName} say: "Hello"`)
-    }
-
-
+for (let i = 0; i < newArr.length; i++) {
+    console.log(newArr[i]);
 }
 
 
-const user1 = new User('John', 'Doe', 20, 'dsa@asd.asd');
+/*
+Написати функцію, яка приймає масив і повертає суму його числових значень
+
+*/
 
 
-
-/* __proto__ - літерально заданий прототип для одного конкретного об'єкта */
-
-
-const cat = {
-    name: 'Murz',
-    age: 9
-}
-
-
-const catProtoObj = {
-    run() {
-        console.log('тигидик')
+function getSumOfArray(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+       if(typeof array[i] === 'number') {
+        sum += array[i];
+       }
     }
+    return sum;
 }
 
-cat.__proto__ = catProtoObj;
+
+/*
+Таска 1: Даний масив. Написати функцію, яка знаходить найбільше числове значення в масиві.
+
+Таска 2: Написати функцію, яка знаходить найменше числове значення в масиві
+
+
+*/
+
+function getMax(array) {
+    let max = array[0];
+    for (let i = 1; i < array.length; i++) {
+       if(array[i] > max) {
+        max = array[i]
+       }
+        
+    }
+
+    return max;
+}
+
+
+
+function getMin(array) {
+    let min = array[0];
+    for (let i = 1; i < array.length; i++) {
+       if(array[i] < min) {
+        min = array[i]
+       }
+        
+    }
+
+    return min;
+}
+
+
+
+/*
+ Знайти середнє аріфметичне числових елементів масива
+
+*/
+
+
+function getAverageOfArray(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+       if(typeof array[i] === 'number') {
+        sum += array[i];
+       }
+    }
+    return sum / array.length;
+}
