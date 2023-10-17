@@ -127,4 +127,16 @@ const res = [4, 5, 6, 7, 8, 10].filter(function(curNum) {
 
 users.sort(function (u1, u2) {
     return u1.age - u2.age
-})
+});
+
+
+/*   reduce */
+
+// Метод reduce зводить всі елементи масива до якогось одного результату
+
+const arr5 = [3, 4, 5, 6, 7, 8, 9];
+
+// Знайти суму всіх елементів масиву
+const result = arr5.reduce(function (accumulator, currentValue) {
+    return accumulator + currentValue
+}, 0);
