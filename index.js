@@ -23,7 +23,7 @@ function User(name, lastName, email, age, gender){
 
 function generateOneUser(){
     const name = USERNAMES[getRandom(0, USERNAMES.length - 1)];
-     const user = new User(name, 'Doe', `mail${getRandom(0, 100)}@mail.com}`, getRandom(10, 100), (Math.random() > 0.5) ? 'male' : 'female');
+     const user = new User(name, 'Doe', `mail${getRandom(0, 100)}@mail.com`, getRandom(10, 100), (Math.random() > 0.5) ? 'male' : 'female');
      return user;
     }
 
@@ -58,3 +58,44 @@ isSubscribed = true/false
 
 5. Отримати масив імейлів юзерів жіночої статі, підписаних на новини
 */
+
+const users = getUsersArray(50);
+
+
+// 1
+
+users.forEach(function(u) {
+    u.isSubscribe = Math.random() > 0.5;
+})
+
+// 2
+
+const fullNames = users.map(function(u){
+    return `${u.name} ${u.lastName}`
+});
+
+//3
+
+const adultUsers = users.filter(function(u){
+    return u.age >= 18
+})
+
+//4
+
+users.sort(function(u1, u2){
+    return u1.name > u2.name ? 1 : -1;
+})
+
+
+///5
+
+//v
+const mailsOfSubscWomen = users.map(function(u){
+    if(u.gender === 'female' && u.isSubscribe){
+        return u.email
+    }
+}).filter(mail => mail);
+
+
+//v2
+const mails2 = users.filter(u => u.gender === 'female' && u.isSubscribe).map(u => u.email);
