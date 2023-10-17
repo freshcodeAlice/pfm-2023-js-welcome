@@ -32,12 +32,8 @@ function getRandom(min, max) {  // генерація рандомного чи�
 }
 
 
-function getUsersArray(dimension) {
-    const arr = new Array(dimension);
-    for (let i = 0; i < arr.length; i++) {
-        arr[i] = generateOneUser();
-    }
-    return arr;
+function getUsersArray(dimension = 10) {
+    return new Array(dimension).fill(null).map(generateOneUser);
 }
 
 
