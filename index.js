@@ -22,7 +22,7 @@ function User(name, lastName, email, age, gender){
 
 
 function generateOneUser(){
-    const name = USERNAMES[getRandom(0, USERNAMES.length)];
+    const name = USERNAMES[getRandom(0, USERNAMES.length - 1)];
      const user = new User(name, 'Doe', `mail${getRandom(0, 100)}@mail.com}`, getRandom(10, 100), (Math.random() > 0.5) ? 'male' : 'female');
      return user;
     }
@@ -41,16 +41,20 @@ function getUsersArray(dimension) {
 }
 
 
-
 /*
-Умовний (тернарний) оператор
+Таски:
 
-if(умова) {
-    блок коду, якщо умова - true
-} else {
-    блок коду, якщо умова - false
-}
+Нагенерувати 50 юзерів.
 
-result = (умова) ? (результат, якщо умова - true) : (результат, якщо умова - false)
+1. За допомогою метода forEach кожному юзеру додати поле 
+isSubscribed = true/false
+(рандомним чином) Math.random() > 0.5
 
+2. Метод map: з масиву юзерів отримати масив повних імен (ім'я + прізвище)
+
+3. Метод filter: отримати всіх повнолітніх юзерів
+
+4. Відсортувати всіх юзерів по імені за алфавітом
+
+5. Отримати масив імейлів юзерів жіночої статі, підписаних на новини
 */
