@@ -1,128 +1,46 @@
-'use strict'
-/* Контекст */
+'use strict';
 
 
-const newspaper = {
-    title: 'Our super-newspaper',
-    articles: [{
-        author: 'John Doe',
-        date: 19-10-2023,
-        text: 'lorem ipsum'
-    }, {
-        author: 'Jane Doe',
-        date: 19-10-2023,
-        text: 'dolor sit'
-    }, {
-        author: 'Rick Doe',
-        date: 19-10-2023,
-        text: 'amet amen'
-    }, {
-    author: 'Sole Doe',
-    date: 19-10-2023,
-    text: 'lorem ipsum'
-    }, {
-    author: 'Nick Doe',
-    date: 19-10-2023,
-    text: 'ipsum loren'
-    }],
-    showArticles: function(){
-        this.articles.forEach(show.bind(this)); /// this -> newspaper
+function fnDeclare(a, b, c) {
+    // Варіант 1:
+    /* пройтись звичайним циклом і знайти суму всіх елементів arguments
+
+    let sum = 0;
+    for (let i = 0; i < arguments.length; i++) {
+     sum += arguments[i];
     }
+    return sum;
+
+    */
+
+    // Варіант 2: переробити arguments в звичайний Array і скористатися методом масива
+
+    return Array.from(arguments).reduce((accum, value) => accum+value, 0);
+
 }
-
-
-function show(currentArticle){
-        console.log(`${this.title} --- ${currentArticle.author} - ${currentArticle.text}`);
-}
-
 
 /*
-Передача контексту
+Задача: з функції, яка приймає 2 аргументи і повертає суму цих 2 аргументів переробити її на функцію, яка може приймати довільне число аргументів і повертати суму
+
+1. Чи можемо ми приймати більше аргументів?
+Всі аргументи, які передаються в функцію, записуються в arguments
+
+Псевдо-масив - об'єкт, схожий на масив, всі елементи мають порядковий номер, об'єкт має length, але не є екземпляром об'єкту Array. Не має доступу до методів та властивостей Array
+
+*/
+/*
+Практика: написати функцію, яка приймає довільну кількість слів і повертає фразу, що містить всі ці слова через пробіл
 
 */
 
 
-const auto = {
-    model: 'BMV',
-    speed: 150
+function getSentence(){
+    return Array.from(arguments).join(' ');
 }
 
 
-function sayVzh(a, b) {
-    console.log(`${this.model} робить вжжж зі швидкістю ${this.speed}`);
-    console.log('А тим часом a+b = ', a+b);
-}
-
-
-//sayVzh.apply(auto, [2, 3]); /// виклик функції з об'єктом auto в якості this
-
-
-/*
-apply(this, [arguments]) - метод функції, який викликає функцію, передає їй в якості this перший аргумент і другий аргумент - масив - передає параметрами функції
-
-
-call(this, arg1, arg2, arg3...) - метод функції, який викликає функцію, передає їй в якості this перший аргумент, всі аргументи після першого (поштучні) - передає параметрами функції
-
-*/
-
-
-const wrappedFunction = sayVzh.bind(auto);  // Огортає виклик функції в контекст, повертає посилання на готову до роботи функцію, якій this = auto
-
-/// викликаємо готову до роботи функцію, контекст якої буде вже з нею
-//wrappedFunction(5, 6);
 
 
 
+const arrFn = (a, b) => a+b;
 
-/*
-Практика:
-
-створити об'єкт user-а, який має
-name,
-lastName,
-age
-favoriteFilms: [{
-    name: 'Titanik',
-    date: 19-01-1990
-}]
-
-Написати функцію (function declaration), яка виводить ім'я користувача і його улюблені фільми
-
-name любить Titanik
-name любить Dance it
-
-
-Передати функції об'єкт юзера як контекст і викликати (методом bind)
-Потім переробити функцію на метод об'єкта і пройтись forEach по масиву об'єкта
-*/
-
-const user = {
-    name: 'John',
-    lastName: 'Doe',
-    favoriteFilms: [{
-        name: 'film1',
-    }, {
-        name: 'film2',
-    },{
-        name: 'film3',
-    }],
-    showMyFav: function() {
-        this.favoriteFilms.forEach((currentFilm)=> {
-            console.log(`${this.name} любить ${currentFilm.name}`)
-        })
-    }
-}
-
-
-function showFilms() {
-    /// this -> user
-    this.favoriteFilms.forEach((currentFilm)=> {
-        console.log(`${this.name} любить ${currentFilm.name}`)
-    })
-    /// this.favoriteFilms - масив, відповідно по масиву треба пройтись циклом
-}
-
-
-const userShowFilms = showFilms.bind(user);
-
-userShowFilms();
