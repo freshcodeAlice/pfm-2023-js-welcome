@@ -26,10 +26,13 @@ const newspaper = {
     text: 'ipsum loren'
     }],
     showArticles: function(){
-        this.articles.forEach((currentArticle) => {
-            console.log(`${this.title} --- ${currentArticle.author} - ${currentArticle.text}`);
-        })
+        this.articles.forEach(show.bind(this)); /// this -> newspaper
     }
+}
+
+
+function show(currentArticle){
+        console.log(`${this.title} --- ${currentArticle.author} - ${currentArticle.text}`);
 }
 
 
@@ -66,4 +69,4 @@ call(this, arg1, arg2, arg3...) - метод функції, який викли
 const wrappedFunction = sayVzh.bind(auto);  // Огортає виклик функції в контекст, повертає посилання на готову до роботи функцію, якій this = auto
 
 /// викликаємо готову до роботи функцію, контекст якої буде вже з нею
-wrappedFunction(5, 6);
+//wrappedFunction(5, 6);
