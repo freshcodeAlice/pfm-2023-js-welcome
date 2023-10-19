@@ -83,7 +83,7 @@ fnDeclare(...numbs);
 
 //1
 
-const getSentence = (...args) => args.join(' ');
+//const getSentence = (...args) => args.join(' ');
 
 //2
 
