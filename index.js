@@ -2,41 +2,68 @@
 /* Контекст */
 
 
-const obj = {
-    key: 'value',
-    method: function() {
-        console.log(`key - ${this.key}`);
+const newspaper = {
+    title: 'Our super-newspaper',
+    articles: [{
+        author: 'John Doe',
+        date: 19-10-2023,
+        text: 'lorem ipsum'
+    }, {
+        author: 'Jane Doe',
+        date: 19-10-2023,
+        text: 'dolor sit'
+    }, {
+        author: 'Rick Doe',
+        date: 19-10-2023,
+        text: 'amet amen'
+    }, {
+    author: 'Sole Doe',
+    date: 19-10-2023,
+    text: 'lorem ipsum'
+    }, {
+    author: 'Nick Doe',
+    date: 19-10-2023,
+    text: 'ipsum loren'
+    }],
+    showArticles: function(){
+        this.articles.forEach((currentArticle) => {
+            console.log(`${this.title} --- ${currentArticle.author} - ${currentArticle.text}`);
+        })
     }
 }
 
 
+/*
+Передача контексту
 
-function test(){  //// Function declaration
-    console.log(this);
-    /* 
-    За умови 'use strict' this -> undefined,
-    без - глобальний об'єкт Window
-    */
+*/
+
+
+const auto = {
+    model: 'BMV',
+    speed: 150
 }
 
 
-test();   /* Window - об'єктне представлення всього браузера */
-
-
-const fn = function() {  // function expression
-    console.log(this);
-        /* 
-    За умови 'use strict' this -> undefined,
-    без - глобальний об'єкт Window
-    */
+function sayVzh(a, b) {
+    console.log(`${this.model} робить вжжж зі швидкістю ${this.speed}`);
+    console.log('А тим часом a+b = ', a+b);
 }
 
-fn();
+
+//sayVzh.apply(auto, [2, 3]); /// виклик функції з об'єктом auto в якості this
 
 
-const arrow = () => {
-    console.log(this);
-    /* У стрілочних функцій this вказує на контекст, в якому функція була створена  */
-}
+/*
+apply(this, [arguments]) - метод функції, який викликає функцію, передає їй в якості this перший аргумент і другий аргумент - масив - передає параметрами функції
 
-arrow();
+
+call(this, arg1, arg2, arg3...) - метод функції, який викликає функцію, передає їй в якості this перший аргумент, всі аргументи після першого (поштучні) - передає параметрами функції
+
+*/
+
+
+const wrappedFunction = sayVzh.bind(auto);  // Огортає виклик функції в контекст, повертає посилання на готову до роботи функцію, якій this = auto
+
+/// викликаємо готову до роботи функцію, контекст якої буде вже з нею
+wrappedFunction(5, 6);
