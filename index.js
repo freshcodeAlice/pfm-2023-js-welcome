@@ -70,3 +70,59 @@ const wrappedFunction = sayVzh.bind(auto);  // Огортає виклик фу�
 
 /// викликаємо готову до роботи функцію, контекст якої буде вже з нею
 //wrappedFunction(5, 6);
+
+
+
+
+/*
+Практика:
+
+створити об'єкт user-а, який має
+name,
+lastName,
+age
+favoriteFilms: [{
+    name: 'Titanik',
+    date: 19-01-1990
+}]
+
+Написати функцію (function declaration), яка виводить ім'я користувача і його улюблені фільми
+
+name любить Titanik
+name любить Dance it
+
+
+Передати функції об'єкт юзера як контекст і викликати (методом bind)
+Потім переробити функцію на метод об'єкта і пройтись forEach по масиву об'єкта
+*/
+
+const user = {
+    name: 'John',
+    lastName: 'Doe',
+    favoriteFilms: [{
+        name: 'film1',
+    }, {
+        name: 'film2',
+    },{
+        name: 'film3',
+    }],
+    showMyFav: function() {
+        this.favoriteFilms.forEach((currentFilm)=> {
+            console.log(`${this.name} любить ${currentFilm.name}`)
+        })
+    }
+}
+
+
+function showFilms() {
+    /// this -> user
+    this.favoriteFilms.forEach((currentFilm)=> {
+        console.log(`${this.name} любить ${currentFilm.name}`)
+    })
+    /// this.favoriteFilms - масив, відповідно по масиву треба пройтись циклом
+}
+
+
+const userShowFilms = showFilms.bind(user);
+
+userShowFilms();
