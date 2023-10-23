@@ -109,3 +109,67 @@ function capitalizeString(str) {
 }
 
 
+
+/*
+Таски:
+
+1. Написати функцію, яка приймає рядок тексту і має всередині масив з "забороненими словами". Повертає true, якщо рядок містить заборонене слово, і false, якщо не містить
+
+const checkArr = ['xxx', 'viagra', 'spam']
+
+*/
+
+const checkArr = ['xxx', 'viagra', 'spam', 'XxXxX']
+
+/*
+function isSpam(str, badWordsArray) {
+    for (let i = 0; i < badWordsArray.length; i++) {
+        if(str.toLowerCase().includes(badWordsArray[i].toLowerCase())){
+            return true
+        }
+    }
+    return false
+}
+*/
+
+function isSpam(str, badWordsArray){
+   return badWordsArray.filter((badWord) => str.toLowerCase().includes(badWord.toLowerCase())).length !== 0;
+}
+
+
+/*
+2. Написати функцію truncate() яка приймає рядок і задану довжину.
+Якщо рядок довший за вказане число, то результатом повертається обрізаний рядок, в кінці якого - "..."
+Якщо рядок початково менший, то нічого не обрізається
+
+*/
+
+/*
+function truncate(str, length) {
+    if(str.length <= length) {
+        return str;
+    }
+    return str.slice(0, length).concat('...');
+}
+
+*/
+
+function truncate(str, length) {
+    return (str.length <= length) ? str : str.slice(0, length).concat('...');
+}
+
+
+/*
+написати функцію, яка приймає рядок і повертає true, якщо рядок є паліндромом і false, якщо не є
+Паліндром - це рядок, який однаково читається з обох боків
+
+isPalindrom('hannah') // true
+isPalindrom('mama') // false
+isPalindrom('racecar') // true
+isPalindrom('computer') // false
+
+*/
+
+function isPalindrom(str) {
+   return str.toLowerCase().split('').reverse().join('') === str.toLowerCase()
+}
