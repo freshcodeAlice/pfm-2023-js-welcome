@@ -173,3 +173,17 @@ isPalindrom('computer') // false
 function isPalindrom(str) {
    return str.toLowerCase().split('').reverse().join('') === str.toLowerCase()
 }
+
+
+/*
+Написати функцію, яка приймає рядок і масив голосних літер, повертає кількість включень голосних у заданому рядку
+
+function countVovels(str, vovelsArray)
+
+vovelsArray = [a, e, i, o, u, y]
+
+'hello to you' //6
+
+'lorem ipsum dolor sit amet' // 9
+
+*/
