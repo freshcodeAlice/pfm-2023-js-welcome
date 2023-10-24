@@ -1,221 +1,78 @@
-/* Методи примітивів */
+/* Стандартні вбудовані об'єкти
+
+Date
+Math
+Errors
+
+Date - не тип даних!
+Це окремий об'єкт, який представляє певну точку часу у вигляді таймштемпу
+*/
+
+const date1 = new Date();
+
+// копіювання дати: date -> timestamp (кількість мілісекунд) -> створити новий об'єкт з заданим часом
+const timestamp = date1.getTime();
+const copyDate = new Date(timestamp); // новий об'єкт з тою самою зафіксованою точкою часу
+
+
+/* Задача: скільки днів залишилось до кінця місяця? */
+
+
+
+const months = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+const date = new Date();
+const howMuchDaysLeft = months[date.getMonth()] - date.getDate();
+
+console.log(howMuchDaysLeft);
+
+
+/* Задача: вивести назву поточного дня тижня */
+
+const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+console.log(week[date.getDay()-1]);
 
 
 /*
-При розробці js стояло дві мети:
-1. Зробити примітиви легкими (не робити їх об'єктами)
-2. Надати розробникам функціонал (властивості та методи) для зручної роботи
+Вивести години, хвилини і секунди поточної дати у вигляді:
+
+Зараз XX годин XX хвилин XX секунд
+*/
+
+console.log(`Зараз ${date.getHours()} годин ${date.getMinutes()} хвилин ${date.getSeconds()} секунд`);
 
 
+/*
+Написати функцію, яка запитує у користувача двома prompt-ами день і місяць його народження і виводить alert-ом, скільки днів лишилось до його дня народження.
 
-Примітиви - це примітиви.
+Якщо в поточному році день народження вже був, то вивести кількість днів до наступного
+
+1. Спитати користувача, коли він народився
+2. Створити новий об'єкт з датою з цими даними
+3. Порівняти з поточною датою, якщо день народження вже пройшов - додати рік і порахувати, скільки лишилось.
 
 
+milliseconds -> days: 100*60*60*24
 */
 
 
+function getDaysLeftToBirthday(){
+    const userBirthDay = Number(prompt('Введіть день свого народження'));
+    const userBirthMonth = Number(prompt('Введіть місяць свого народження'));
 
-let a = 'hello'; // створюю примітивне значення, кладу його в змінну
-
-a.length // викликаю властивість примітива
-/*
-1. Під капотом рушія js неявним чином створюєтся Об'єкт-обгортка
-new String('hello')
-2. У новоствореного об'єкта викликається потрібна властивість або метод, результат повертається на місце виклику
-3. Об'єкт-обгортка знищується, примітив залишається примітивом.
-
-*/
-
-// Boolean
-
-let bool = true;
-
-// Number
-
-Number.isNaN() /// друга версія глобальної функції isNaN
-
-
-/// String
-
-let str = 'lorem ipsum dolor sit amet';
-           
-
-
-str.at(0) /// === str[0] - повертає символ рядка за вказаним індексом
-// повертає undefined, якщо переданий індекс виходить за межі рядка
-
-
-str.charCodeAt() // повертає unicode-номер символа, що стоїть за вказаним індексом
-
-let str2 = 'hello';
-
-str.concat(' ', str2); // конкатенація рядків
-
-
-str.includes('a') // шукає переданий підрядок у початковому рядку
-
-
-str.indexOf() // повертає індекс першого входження підрядка в рядок. Якщо нема = -1
-
-
-str.repeat() // повторює і склеює рядки задану кількість разів
-
-
-//str.replace(str1, str2) // шукає входження str1 в рядку і замінює їх на str2. Може працювати як з підрядками, так і регулярними виразами 
-
-
-str.slice() // копіює в новий рядок вказану частину від початкового індексу до кінечного
-
-
-//str.split(separator) //  перетворювати рядок тексту на Array,тобто розбивати рядок на масив одиниць, використовуючи вказаний сепаратор. Split - зворотня операція до методу масиву join()
-
-
-str.trim() // обрізає зайві пробіли на початку та в кінці рядка
-
-
-str.toUpperCase() // перетворює в верхній регістр (великі літери)
-str.toLowerCase() // перетворює в нижній регістр (маленькі літери)
-
-function checkEqString(str1, str2) {
-   return str1.toLowerCase() === str2.toLowerCase();
-}
-
-checkEqString('check', 'check') // true
-checkEqString('CHECK', 'check') // true
-checkEqString('cheCK', 'CHeck') // true
-
-
-
-/*
-Написати функцію, яка приймає рядок тексту, що містить різні слова. Повернути рядок, в якому кожне нове слово - з великої літери
-
-*/
-
-/*
-function capitalizeString(str) {
-    const arr = str.split(' ');
-    for (let i = 0; i < arr.length; i++) {
-       let firstLetter = arr[i][0];
-       let upper = firstLetter.toUpperCase();
-        arr[i] = upper + arr[i].slice(1);
+    const today = new Date(); // витягнути рік
+    let userbDate = new Date(today.getFullYear(), userBirthMonth - 1, userBirthDay);
+   
+    if(userbDate < today) {    //// якщо в цьому році вже дн був - додати рік
+        userbDate = new Date(userbDate.setFullYear(today.getFullYear() + 1));
     }
-    let res = arr.join(' ');
-    return res;
-}
-*/
 
-function capitalizeString(str) {
-    return str.split(' ').map((word) => word.at(0).toUpperCase().concat(word.slice(1))).join(' ');
-}
+    const millisecondsInDay = 1000*60*60*24;
 
+    const res = (userbDate - today) / millisecondsInDay;
+  alert(`До дн залишилось ${res.toFixed()} днів`)
 
-
-/*
-Таски:
-
-1. Написати функцію, яка приймає рядок тексту і має всередині масив з "забороненими словами". Повертає true, якщо рядок містить заборонене слово, і false, якщо не містить
-
-const checkArr = ['xxx', 'viagra', 'spam']
-
-*/
-
-const checkArr = ['xxx', 'viagra', 'spam', 'XxXxX']
-
-/*
-function isSpam(str, badWordsArray) {
-    for (let i = 0; i < badWordsArray.length; i++) {
-        if(str.toLowerCase().includes(badWordsArray[i].toLowerCase())){
-            return true
-        }
-    }
-    return false
-}
-*/
-
-function isSpam(str, badWordsArray){
-   return badWordsArray.filter((badWord) => str.toLowerCase().includes(badWord.toLowerCase())).length !== 0;
 }
 
-
-/*
-2. Написати функцію truncate() яка приймає рядок і задану довжину.
-Якщо рядок довший за вказане число, то результатом повертається обрізаний рядок, в кінці якого - "..."
-Якщо рядок початково менший, то нічого не обрізається
-
-*/
-
-/*
-function truncate(str, length) {
-    if(str.length <= length) {
-        return str;
-    }
-    return str.slice(0, length).concat('...');
-}
-
-*/
-
-function truncate(str, length) {
-    return (str.length <= length) ? str : str.slice(0, length).concat('...');
-}
-
-
-/*
-написати функцію, яка приймає рядок і повертає true, якщо рядок є паліндромом і false, якщо не є
-Паліндром - це рядок, який однаково читається з обох боків
-
-isPalindrom('hannah') // true
-isPalindrom('mama') // false
-isPalindrom('racecar') // true
-isPalindrom('computer') // false
-
-*/
-
-function isPalindrom(str) {
-   return str.toLowerCase().split('').reverse().join('') === str.toLowerCase()
-}
-
-
-/*
-Написати функцію, яка приймає рядок і масив голосних літер, повертає кількість включень голосних у заданому рядку
-
-function countVowels(str, vovelsArray)
-
-vovelsArray = [a, e, i, o, u, y]
-
-'hello to you' //6
-
-'lorem ipsum dolor sit amet' // 9
-
-*/
-
-/*
-function countVowels(str, vowelArray) {
-    let count = 0;
-    for (let i = 0; i < str.length; i++) {
-       if(vowelArray.includes(str[i])){
-        count++
-       }
-    }
-    return count
-}
-*/
-
-const vovelsArray = ['a', 'e', 'i', 'o', 'u', 'y'];
-
-
-function countVowels(str, vowelArray){
-    return str.split('').filter(letter => vovelsArray.includes(letter)).length
-}
-
-
-/*
-
-Написати функцію, яка знаходить суму цифр в заданому числі. Користуватися методами рядка
-
-
-*/
-
-
-function getSumOfNumber(num){
-    return String(num).split('').reduce((accum, elem) => accum + Number(elem), 0);
-}
+getDaysLeftToBirthday()
