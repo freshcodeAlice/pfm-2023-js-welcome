@@ -178,7 +178,7 @@ function isPalindrom(str) {
 /*
 Написати функцію, яка приймає рядок і масив голосних літер, повертає кількість включень голосних у заданому рядку
 
-function countVovels(str, vovelsArray)
+function countVowels(str, vovelsArray)
 
 vovelsArray = [a, e, i, o, u, y]
 
@@ -187,3 +187,35 @@ vovelsArray = [a, e, i, o, u, y]
 'lorem ipsum dolor sit amet' // 9
 
 */
+
+/*
+function countVowels(str, vowelArray) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+       if(vowelArray.includes(str[i])){
+        count++
+       }
+    }
+    return count
+}
+*/
+
+const vovelsArray = ['a', 'e', 'i', 'o', 'u', 'y'];
+
+
+function countVowels(str, vowelArray){
+    return str.split('').filter(letter => vovelsArray.includes(letter)).length
+}
+
+
+/*
+
+Написати функцію, яка знаходить суму цифр в заданому числі. Користуватися методами рядка
+
+
+*/
+
+
+function getSumOfNumber(num){
+    return String(num).split('').reduce((accum, elem) => accum + Number(elem), 0);
+}
