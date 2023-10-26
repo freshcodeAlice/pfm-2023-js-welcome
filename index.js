@@ -101,15 +101,18 @@ function URL(protocol, domain, path, queryParams) {
     return `${protocol}://${domain}/${path}?${queryParams}`
 }
 
-function fullURL(protocol) {
-    return function(domain) {
-        return function (path) {
-            return function(queryParams='') {
-                return `${protocol}://${domain}/${path}${queryParams ? `?${queryParams}` : ''}`
-            }
-        }
-    }
-}
+// function fullURL(protocol) {
+//     return function(domain) {
+//         return function (path) {
+//             return function(queryParams='') {
+//                 return `${protocol}://${domain}/${path}${queryParams ? `?${queryParams}` : ''}`
+//             }
+//         }
+//     }
+// }
+
+
+const fullURL = protocol => domain => path => (queryParams = '') => `${protocol}://${domain}/${path}${queryParams ? `?${queryParams}` : ''}`;
 
 const URLhttp = fullURL('http');
 const URLdom = URLhttp('mysait.com'); // http, 'mysait'
@@ -117,6 +120,7 @@ const URLdom = URLhttp('mysait.com'); // http, 'mysait'
 const URLpath = URLdom('index');
 //const URLquery = URLpath('key1=valu1');
 
+const doneURL = fullURL('http')('masait.com')('page.html')('key=value');
 
 
 ///// об'єкт і замикання
