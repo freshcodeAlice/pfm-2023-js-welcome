@@ -138,3 +138,24 @@ function makeAPICounter() {
 }
 
 const objCounter = makeAPICounter(); //  повертається об'єкт, який має два методи, що зберігають count в замиканні
+
+
+
+/*
+Написати функцію, що повертає об'єкт з методами push(), pop(), які додають в кінець і відповідно видаляють з кінця елементи масива, що зберігається у замиканні
+
+
+*/
+
+
+function makeArray(){
+    const arr = [];
+    return {
+        push: function(v) {
+            return arr.push(v);
+        },
+        pop: function(){
+            return arr.pop()
+        }
+    }
+}
