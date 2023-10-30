@@ -272,4 +272,57 @@ const wrkr = new Worker('John', 5, 20);
 */
 
 
-// Таска - приховати поле days і зробити геттери та сеттери для нього
+
+
+/*
+Створити класс RangeValidator
+- start (початок)
+- end (кінець діапазону)
+
+Умова: кінець не може бути раніше за початок діапазону - викидуємо помилку, об'єкт не створюємо
+
+реалізувати геттери та сеттери для обох властивостей
+реалізувати метод validate(value) і перевіряє, чи входить знаення в діапазон
+реалізувати геттер range -> [start, ...., end] 
+
+*/
+
+
+class RangeValidator{
+    constructor(start, end){
+        this.start = start;
+        this.end = end;
+    }
+
+    get start(){
+        return this._start;
+    }
+
+    set start(v) {
+        this._start = v;
+    }
+
+    get end() {
+        return this._end;
+    }
+
+    set end(v) {
+        if (v < this._start) {
+            throw new RangeError('End must be greate than start')
+        }
+        this._end = v;
+    }
+
+    get range(){
+        // const arr = [];
+        // for (let i = this.start; i <= this.end; i++){
+        //     arr.push(i);
+        // }
+
+        return new Array(this.end-this.start+1).fill(null).map((el, i) => this.start + i)
+    }
+
+    validate(value) {
+        return value >= this.start && value <= this.end
+    }
+}
