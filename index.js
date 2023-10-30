@@ -1,174 +1,200 @@
-/* Рекурсія */
-
 
 /*
-Рекурсія - функція викликає саму себе (з іншими аргументами)
-
-
-База рекурсії - умова, за якої наступного виклику функції не станеться, а замість цього повернеться обчислений результат
-*/
-
-//debugger;
-function factorial(n){
-    if (n === 1) {  // база рекурсії
-        return 1;
-    }
-  
-    return n*factorial(n-1) /// рекурсивний випадок
-}
-
-
-/// 5! = 1*2*3*4*5
-
-
-//factorial(5);
-
-
-/*
-Написати рекурвну функцію, яка зводить число у заданий ступінь
-
-pow(base, power)
-5**3 = 5*5*5 = 125
-5**1 = 5
-
-*/
-
-/*
-function pow(base, power){
-    if (power === 1) {
-        return base;
-    }
-    return base * pow(base, power-1)
+const user = {
+    firstName: 'Jane',
+    lastName: 'Doe',
+    age: 18,
+    email: 'joe@gmail.com'
 }
 */
 
-const pow = (base, power) => (power === 1) ? base : base * pow(base, power-1)
-
-
-
-
-const res = pow(5, 4);
-//console.log(res);
-
-
 /*
-Знаходження н-члена послідовності Фібоначчі
-F(n) = F(n-1) + F(n-2)
-
-F(2) = 1; // база рекурсії
-F(1) = 1;
-
-*/
-
-
-function fibonacchi(n){
-    if (n === 1 || n === 2) {
-        return 1;
-    }
-    return fibonacchi(n-1) + fibonacchi(n-2);
-} 
-
-// Зробити обчислення ряду Фібоначчі в циклі
-
-function fibIter(n){
- //   debugger;
-    let f1 = 1;
-    let fnext = 1;
-
-    let fn;
-
-    if (n === 0)
-    {
-        return 0
-    }    
-    if (n === 1) {
-        return f1
-    }
- 
- for (let i = 2; i <= n; i++){
-        fn = f1 + fnext;
-        f1 = fnext;
-        fnext = fn;
-    }
-
-    return fn;
+function User(firstName, lastName, age, email) {
+    // create {}, this -> {}
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.email = email;
+   
 }
 
+function UserProto(){
+    this.sayHello = function () {
+        console.log(`${this.firstName} say Hello`)
+    }
+}
 
-
-console.time('1');
-fibonacchi(20)
-console.timeEnd('1');
-
-
-console.time('2');
-fibIter(20)
-console.timeEnd('2');
-
-
-
-
-/*
-Дано масив, що містить числа або вкладені масиви. Знайти найбільше число
-
-[2, 4, 2, 3, [3, 1, 2, [3, 6, 4], 3], 1, [[[[[5]]]]]]
-
-Декомпозиція задачі
-1. Створити "порівнятор"
-2. Перебрати масив і кожне число порівняти з порівнятором
-3. Якщо поточне число - більше, то воно займає місце порівнятора
-4. Якщо перед нами - не число, а масив, то зайти в нього і перебрати його повністю, порівнюючи його елементи.
-
+User.prototype = new UserProto();
 */
 
 
-function findMax(arr){
-    let max = -Infinity;
 
-    for (let i = 0; i < arr.length; i++) {
-        let el = arr[i];
-        if (Array.isArray(el)){
-            // рекурсивний випадок
-            el = findMax(el);
+class User {
+    constructor(firstName, lastName, age, email){
+        // створюємо об'єкт, наповнюємо за шаблоном
+        this.firstName = firstName;
+        this.lastName = lastName;
+        if (age < 20) {
+            // робимо щось, щоб не створювати екземпляр
+            // return null; -- не спрацює, бо повернення примітиву ігнорується
+          throw new Error('User under 18'); // якщо при спробі сконструювати юзера виникає помилка, об'єкт юзера не буде створений
         }
-        if (el > max) {
-            max = el;
-        }
-        
+        this.age = age;
+        this.email = email;
+
+        // повертається this 
     }
-    return max;
+
+    sayHello () {  // метод юзера у прототипі
+        console.log(`${this.firstName} say Hello`)
+    }
+
+
 }
 
-/// [2, 4, 2, 3, [3, 1, 2, [3, 6, 4], 3], 1, [[[[[5]]]]]]  => [2, 4, 2, 3, 3, 1, 2, 3, 6, 4, 3, 1, 5]
+
+
+
+//const user = new User('Jane', 'Doe', 18, 'joe@gmail.com');
+
+
+const user2 = new User('John', 'Doe', 20, 'joe@gmail.com');
 
 
 
 /*
-Таска: написати реалізацію методу flat(), який приймає масив з вкладеними масивами і повертає одномірний
+Створити клас Worker
+- name
+- rate
+- days
+
+Метод getSalary(), який розраховує зп за формулою: rate*days
+
 
 */
 
-function flatten(arr, depth){
+
+class Worker{
+    constructor(name, rate, days) {
+        this.name = name;
+        if (rate < 0) {
+            throw new RangeError('Rate must be great that 0');
+        }
+        this.rate = rate;
+        if (days < 0) {
+            this.days = 0;
+        } else {
+            this.days = days;
+        }
+
+    }
+
+    getSalary() {
+        return this.rate * this.days
+    }
+}
+
+
+const wrkr = new Worker('John', 5, 20);
+
+/*
+ставка не може бути < 0, якщо передали -ставку, викинути помилку
+кількість відпрацьованих днів не може бути < 0, то не викидати, замість цього this.days = 0
+
+
+*/
+
+
+
+/*
+Паливо (Fuel)
+- об'єм (volume)
+- щільність (density)
+
+- getFuelWeight
+вага палива
+
+
+Авто
+- модель
+- власна вага
+- паливо
+
+- getFullWeight():
+Розрахувати повну вагу авта
+
+*/
+
+
+class Fuel{
+    constructor(volume, density) {
+        this.volume = volume;
+        this.density = density;
+    }
+
+    getFuelWeight() {
+        return this.volume * this.density;
+    }
 
 }
 
+
+class Auto{
+    constructor(model, weight, fuel){
+        this.model = model;
+        this.weight = weight;
+        this.fuel = fuel;  // в якості значення передається об'єкт
+    }
+
+    getFullWeight() {
+        return this.weight + this.fuel.getFuelWeight()
+    }
+}
+
+
+const kerosin = new Fuel(50, 0.9);
+
+const bmv = new Auto('BMV', 500, kerosin);
+
+
 /*
-Написати дві реалізації методу - одну рекурсивну, другу ітеративну (циклом)
-Рекурсивну спробувати написати стрілкою в скороченому варіанті
+Друг
+- ім'я
+- кількість грошей
+- посилання на іншого друга або null, якщо друзів не має
+
+- метод getFriendMoney
 
 
-Задачка з *: дописати метод sort, використовуючи рекурсію
+*/
 
-[2, 1, 2, 2, [3, 2, 1], [2, [2, 2, 3, [3]]]] -> [2, 1, 2, 2, 3, 2, 1, 2, 2, 2, 3, 3]
 
-Декомпозиція задачі:
-0. Створити новий пустий масив, в який буде зберігатися результат
-1. Пройтись по масиву від початку до кінця
-2. Якщо перед нами - не масив - додаємо його до результуючого масиву
-3. Якщо перед нами - масив, то:
-    - проходимось по масиву від початку до кінця
-    - якщо перед нами - не  масив - додаємо його до результуючого масиву
-    
-    - зменшувати глибину depth на 1
+class Friend {
+    constructor (name, amountCash, friend = null) {
+        this.name = name;
+        this.amountCash = amountCash;
+        this.friend = friend;
+    }
+
+    getFriendMoney() {
+        if (this.friend instanceof Friend) {  // ця перевірка має бути на приналежніть до друзів
+            return this.amountCash + this.friend.getFriendMoney();
+        } else {
+            return this.amountCash;
+        }
+      
+    }
+}
+
+
+const me = new Friend('John', 10, null);
+
+const fr = new Friend('Jake', 10, me);
+
+
+const fr2 = new Friend('Rick', 20, fr);
+
+/*
+Як дізнатись, що об'єкт є екземпляром певного класу
 
 */
