@@ -34,11 +34,6 @@ class User {
         // створюємо об'єкт, наповнюємо за шаблоном
         this.firstName = firstName;
         this.lastName = lastName;
-        if (age < 20) {
-            // робимо щось, щоб не створювати екземпляр
-            // return null; -- не спрацює, бо повернення примітиву ігнорується
-          throw new Error('User under 18'); // якщо при спробі сконструювати юзера виникає помилка, об'єкт юзера не буде створений
-        }
         this.age = age;
         this.email = email;
 
@@ -49,10 +44,22 @@ class User {
         console.log(`${this.firstName} say Hello`)
     }
 
+    set age(v) {
+        if (v < 20) {
+            // робимо щось, щоб не створювати екземпляр
+            // return null; -- не спрацює, бо повернення примітиву ігнорується
+          throw new Error('User under 18'); // якщо при спробі сконструювати юзера виникає помилка, об'єкт юзера не буде створений
+        }
+        this._age = v;
+    }
+
+    static isUser(u){
+        return u instanceof User;
+    }
 
 }
 
-
+// переписати класс User, переробивши встановлення age на сеттер 
 
 
 //const user = new User('Jane', 'Doe', 18, 'joe@gmail.com');
@@ -326,3 +333,5 @@ class RangeValidator{
         return value >= this.start && value <= this.end
     }
 }
+
+
