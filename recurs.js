@@ -191,9 +191,9 @@ const arr = [2, 1, 2, 2, [3, 2, 1], [2, [2, 2, 3, [3]]]];
 
 
 function iterFlat(arr, depth = 1) {
-    const res = [];
-
+    let res = [];
     while(depth > 0) {
+        res = [];
         for(let i = 0; i < arr.length; i++) {
             if (Array.isArray(arr[i])){
                 res.push(...arr[i]);
@@ -202,7 +202,7 @@ function iterFlat(arr, depth = 1) {
             }
         }
         depth--;
+        arr = res;
     }
-
     return res;
 }
