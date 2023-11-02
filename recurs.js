@@ -47,7 +47,7 @@ const pow = (base, power) => (power === 1) ? base : base * pow(base, power-1)
 
 
 
-const res = pow(5, 4);
+//const res = pow(5, 4);
 //console.log(res);
 
 
@@ -95,16 +95,17 @@ function fibIter(n){
 }
 
 
-
+/*
 console.time('1');
 fibonacchi(20)
 console.timeEnd('1');
+*/
 
-
+/*
 console.time('2');
 fibIter(20)
 console.timeEnd('2');
-
+*/
 
 
 
@@ -148,9 +149,6 @@ function findMax(arr){
 
 */
 
-function flatten(arr, depth){
-
-}
 
 /*
 Написати дві реалізації методу - одну рекурсивну, другу ітеративну (циклом)
@@ -172,3 +170,39 @@ function flatten(arr, depth){
     - зменшувати глибину depth на 1
 
 */
+
+// recursive
+function recFlat(arr, depth = 1){
+    const res = [];
+
+    for(let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i]) && depth > 0) {
+           
+            res.push(...recFlat(arr[i], depth - 1));
+        } else {
+           res.push(arr[i]);
+        }
+    }
+    return res;
+}
+
+
+const arr = [2, 1, 2, 2, [3, 2, 1], [2, [2, 2, 3, [3]]]];
+
+
+function iterFlat(arr, depth = 1) {
+    const res = [];
+
+    while(depth > 0) {
+        for(let i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i])){
+                res.push(...arr[i]);
+            } else {
+                res.push(arr[i]);
+            }
+        }
+        depth--;
+    }
+
+    return res;
+}
