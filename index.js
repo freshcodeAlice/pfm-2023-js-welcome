@@ -535,3 +535,113 @@ class Squirrel {
         return this.repertuar.includes(songName) ? `${this.name} білка може це заспівати` : `${this.name} білка не може цього заспівати`
     }
   }
+
+//////////////
+
+ class Figure {   /* Абстрактний клас, від якого наслідуються інші класи */
+    constructor(type) {
+        this.type = type;
+    }
+
+
+    getSquare(){
+        /// undefined
+    }
+ }
+
+
+class Triangle extends Figure {
+    constructor(a, b, angle) {
+        super('tringle');
+        this.a = a;
+        this.b = b;
+        this.angle = angle;
+    }
+
+
+    getSquare(){
+        return 0.5 * this.a * this.b * Math.sin(this.angle);
+    }
+}
+
+
+class Square extends Figure {
+    constructor(a) {
+        super('square');
+        this.a = a;
+    }
+
+    getSquare() {
+        return this.a*this.a;
+    }
+}
+
+
+class Circle extends Figure {
+    constructor(radius) {
+        super('circle');
+        this.radius = radius;
+    }
+}
+
+
+function calculate(figure){
+    if (figure instanceof Figure){
+        return figure.getSquare();
+    }
+
+}
+
+
+const trg = new Triangle(3, 2, 60);
+
+calculate(trg);
+
+
+/*
+Клас Auto
+- maxSpeed
+- capacity
+- fuel
+
+start() - "машина їде"
+
+Класс Truck
+яка наслідується від Auto + має 
+- maxCargo - максимальна вантажопідйомність
+
+start() - "вантаж відправлено"
+
+Написати функцію, яка стартує передану їй машину і виводить на консоль результат виклику методу
+
+*/
+
+class Car {
+    constructor(maxSpeed, capacity, fuel) {
+        this.maxSpeed = maxSpeed;
+        this.capacity = capacity;
+        this.fuel = fuel;
+    }
+
+    start(){
+        return `машина їде`
+    }
+}
+
+class Truck extends Car {
+    constructor(maxSpeed, capacity, fuel, maxCargo) {
+        super(maxSpeed, capacity, fuel);
+        this.maxCargo = maxCargo;
+    }
+
+    start(){
+        return "вантаж відправлено"
+    }
+}
+
+
+function getStatus(auto) {
+    if (auto instanceof Car) {
+        console.log(auto.start());
+    }
+}
