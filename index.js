@@ -335,3 +335,67 @@ class RangeValidator{
 }
 
 
+
+/*  ООП  */
+
+
+class Animal{
+    constructor(name, type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    eat() {
+        return `${this.name} is eating`
+    }
+
+    static isAnimal(obj) {
+        return obj instanceof Animal;
+    }
+
+    toString() {
+        return `${this.name} is ${this.type}`
+    }
+
+}
+
+
+
+
+
+class Cat extends Animal {
+    constructor(name){
+        super(name, null); /// спочатку створився об'єкт Animal, туди додались всі дані, які йому були потрібні, і тільки після цього клас-наслідник може додавати свої властівості і методи
+        this.type = 'cat';
+    }
+
+    run(){
+        return `${this.name} is running`
+    }
+
+
+    eat() {
+        return `${this.name} mrmyau`
+    }
+}
+
+
+class Dog extends Animal {
+    constructor(name) {
+        super(name, null);
+        this.type = 'dog';
+    }
+
+
+    bark() {
+        return `gav-gav`;
+    }
+}
+
+const cat = new Cat ('Murka');
+
+/*
+Якщо клас розширює інший класс (extends):
+в конструкторі класу-наслідника першим ділом викликаємо конструктор батьківського класу
+
+*/
