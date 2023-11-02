@@ -399,3 +399,139 @@ const cat = new Cat ('Murka');
 в конструкторі класу-наслідника першим ділом викликаємо конструктор батьківського класу
 
 */
+
+
+
+/*
+Створити клас Юзер, який має
+- ім'я
+- прізвище
+- мейл
+
+метод
+- getFullName, який повертає повне ім'я
+
+
+Класс Moderator,
+який має все те саме + метод
+ - getBan(user) -> user.isBanned = true
+
+Класс Админ,
+який вміє все те саме, що Модератор,
+і властивість admin = true
+
+
+*/
+
+
+class Userrr {
+    constructor(firstName, lastName, email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+
+new Userrr('John', 'Doe', 'fdskjhf@lkjsdf')
+
+ class Moderator extends Userrr {
+    constructor(firstName, lastName, email, anotherValue){
+        super(firstName, lastName, email);
+        this.anotherValue = anotherValue;
+    }
+
+    getBan(u) {
+        return u.isBanned = true;
+    }
+ }
+
+ class Admin extends Moderator {
+    constructor(firstName, lastName, email, anotherValue) {
+        super(firstName, lastName, email, anotherValue);
+        this.admin = true;
+    }
+ }
+
+ /*
+User -> Moderator -> Admin
+
+ */
+
+
+
+
+/*
+Створити клас Білка
+- name
+- color
+
+- climb -> `ця білка лізе на дерево`
+
+
+Створити клас Білка-Летяга, яка вміє не тільки лазати по деревах, але і літати
+- maxFlyDistance
+
+- fly(v) -> якщо v < maxFlyDistance -> `ця білка вміє літати так далеко`
+            інакше -> 'ця білка не може залетіти так далеко'
+
+
+
+Створити клас КазковаБілка,
+яка окрім всього, що вміє Білка-Летяга вмітиме ще співати пісні і танці танцювати
+- repertuar: [String] - перелік пісень, які білка вміє співати
+- isDancing = false
+
+dance() -> isDansing -> true
+
+singASong(String) -> чи вміє білка співати цю пісню
+
+
+*/
+
+class Squirrel {
+    constructor(name, color){
+        this.name = name;
+        this.color = color;
+    }
+
+
+    climb() {
+        return `${this.name} лазає по деревах`
+    }
+}
+
+
+ class FlyingSquirrel extends Squirrel {
+    constructor(name, color, maxFlyDistance) {
+        super(name, color);
+        this.maxFlyDistance = maxFlyDistance;
+    }
+
+    fly(v) {
+        return this.maxFlyDistance > v ? `${this.name} білка вміє літати так далеко` : `${this.name} білка не вміє літати так далеко`
+    }
+ }
+
+
+  class FairySquirrel extends FlyingSquirrel {
+    constructor(name, color, maxFlyDistance, repertuar = []){
+        super(name, color, maxFlyDistance);
+        this.repertuar = repertuar;
+        this.isDancing = false;
+    }
+
+
+    dance() {
+        this.isDancing = true;
+    }
+
+
+    singASong(songName) {
+        return this.repertuar.includes(songName) ? `${this.name} білка може це заспівати` : `${this.name} білка не може цього заспівати`
+    }
+  }
