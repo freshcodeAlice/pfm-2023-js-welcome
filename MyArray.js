@@ -162,7 +162,7 @@ const myarr = new MyArray(9, 8, 7, 6);
 
 
 for (const elem of myarr) {
-    console.log(elem);
+//    console.log(elem);
 }
 
 
