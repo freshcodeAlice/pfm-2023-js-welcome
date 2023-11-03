@@ -1,14 +1,12 @@
-function MyArray(...argums){
+class MyArray {
+    constructor(...argums) {
     // new створює пустий {} і кладе його в this
     this.length = 0;
     this.push(...argums);
+    }
 
 
-}
-
-
-function MyArrayProto() {
-    this.push = function (...v) {
+    push(...v) {
        for(let i = 0; i < v.length; i++){
         this[this.length] = v[i];
         this.length++;
@@ -17,7 +15,7 @@ function MyArrayProto() {
     }
 
 
-    this.pop = function(){
+    pop() {
         // взяти останній елемент, видалити його
         let temporary = this[this.length - 1];
         delete this[this.length - 1];
@@ -28,14 +26,14 @@ function MyArrayProto() {
     }
 
 
-    this.forEach = function(fn, thisArg) {
+    forEach(fn, thisArg) {
         for (let i = 0; i < this.length; i++) {
           fn.call(thisArg, this[i], i, this)         
         }
     }
 
 
-    this.concat = function(array2) {
+    concat(array2) {
         /*  Викликається на екземплярі масиву, отримує другий масив в аргументи і повертає новий = масив1 + масив2 */
         const result = new MyArray();
         this.forEach(el => result.push(el));
@@ -44,14 +42,14 @@ function MyArrayProto() {
         return result;
     }
 
-    this.at = function(index) {
+   at (index) {
         if(index < 0) {
             return this[this.length + index];
         }
         return this[index]
     }
 
-    this.fill = function(value, start = 0, end = this.length) {
+    fill(value, start = 0, end = this.length) {
         if(start < 0) {
             start = this.length + start;
         }
@@ -64,7 +62,7 @@ function MyArrayProto() {
         return this
     }
 
-    this.filter = function(filteringFunction, thisArg) {
+   filter (filteringFunction, thisArg) {
         const result = new MyArray();
         for (let i = 0; i < this.length; i++) {
             if(filteringFunction.call(thisArg, this[i], i, this)){
@@ -74,7 +72,7 @@ function MyArrayProto() {
         return result
     }
 
-    this.find = function(checkingFunction, thisArg) {
+    find (checkingFunction, thisArg) {
         for (let i = 0; i < this.length; i++) {
             if(checkingFunction.call(thisArg, this[i], i, this)){
                 return this[i]
@@ -83,7 +81,7 @@ function MyArrayProto() {
     }
 
 
-    this.join = function(separator = ','){
+    join (separator = ','){
         let str = '';
         for (let i = 0; i < this.length - 1; i++) {
            str += this[i] + separator;
@@ -94,7 +92,7 @@ function MyArrayProto() {
 
 
 
-    this.map = function(fn, thisArg) {
+   map (fn, thisArg) {
         const res = new MyArray();
         for (let i = 0; i < this.length; i++) {
            res.push(fn.call(thisArg, this[i], i, this));            
@@ -102,7 +100,7 @@ function MyArrayProto() {
     }
 
 
-    this.slice = function(start = 0, end = this.length) {
+    slice (start = 0, end = this.length) {
         if (start < 0) {
             start = this.length + start;
         }
@@ -119,7 +117,7 @@ function MyArrayProto() {
         return res;
     }
 
-    this.sort = function(compareFunction) {
+    sort (compareFunction) {
         for (let j=0; j < this.length; j++) {
             for (let i = 0; i < this.length; i++) {
                 if (compareFunction(this[i], this[i+1]) > 0){
@@ -139,30 +137,34 @@ function MyArrayProto() {
         return this
     }
 
+
+    [Symbol.iterator](){
+        let i = 0;
+        
+        return {
+            /// this за допомогою стрілки береться з контексту метода об'єкта (тобто вказує на сам об'єкт)
+           next: () => {
+            return {
+                value: this[i++],
+                done: i > this.length
+            }
+            
+           }
+        }
+    }
+
 }
 
-MyArray.prototype = new MyArrayProto();
 
-const arr = new MyArray();
+const myarr = new MyArray(9, 8, 7, 6);
+
+//const iter = myarr[Symbol.iterator]();
 
 
-/*
-ДЗ: 
+for (const elem of myarr) {
+    console.log(elem);
+}
 
-доповнити колекцію MyArray реалізацією методів нативного масива:
-+/- concat
-+ at
-+ fill
-+ filter
-+ find
-+ join
-+ map
-+ slice
-+/- sort
-
-Коли дійдемо до рекурсій та ітераторів - доробимо методи на найкращий вигляд
-
-*/
 
 
 
