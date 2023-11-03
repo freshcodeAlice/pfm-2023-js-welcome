@@ -33,3 +33,50 @@ Symbol.iterator - це зарезервований системний мето�
 */
 
 
+const myObj = {
+    _1: 'a',
+    _2: 'b',
+    _3: 'c',
+    _4: 'd',
+    _5: 'e',
+    _6: 'f',
+    length: 6,
+    [Symbol.iterator]() {
+        let i = 1;
+        return {
+            next: () => {
+                return {
+                    done: i >= this.length,
+                    value: this[`_${i++}`]
+                }
+            }
+        }
+    }
+}
+
+
+/*
+Написати ітератор для такого об'єкту:
+
+
+*/
+
+const exoticObj = {
+    start: 2,
+    end: 10,
+    [Symbol.iterator]() {
+        let from = this.start;
+        let to = this.end + 1;
+        return {
+            next: () => {
+                return {
+
+                    value: from++,
+                    done: from >= to,
+                }
+            }
+        }
+    }
+}
+
+/// Реалізувати ітератор таким чином, щоби перебір об'єкт виводив числа від start до end (включно)
