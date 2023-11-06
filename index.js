@@ -1,44 +1,23 @@
-/*
-DRY
-
-Don`t
-repeat
-yourself
-
-(не повторюй себе)
-якщо одна дія повторюється багато разів - робимо цикл
-якщо дія повторюється з різними вхідними даними - робимо функцію
-якщо треба створити декілька об'єктів за певним шаблоном - робимо клас
-якщо об'єкти мають додаткові властивості та методи до попередніх класів (вже існуючих) - використовуємо наслідування (розширюємо базовий клас)
-
-*/
+class AuthUserError extends Error {
+    constructor(message, code) {
+        super(message);
+        this.code = code;
+    }
+}
 
 
-/*
-KISS 
-Keep it simple, stupid
-(роби простіше)
-
-YAGNI
-You aren`t gonna need it
-(тобі це не знадобиться)
 
 
-Over-engenering (овер-архітектура) - це створення зайвого функціоналу, який так ніколи і не буде потрібен
-1. Втрата часу
-2. Потенційні проблеми з підтримкою коду
+
+try {
+ 
+        throw new AuthUserError();
+
+} catch(error) {
+    if (error instanceof AuthUserError) {
+       // якщо ця помилка дійсно того типу, який нам треба - обробити її особливим чином
+    }
+}
 
 
-*/
-
-
-/*
-SOLID
-
-S - single responsibility principle - принцип єдиної відповідальності
-O - open-closed principle - принцип відкритості-закритості - при проєктуванні можна подумати наперед про те, щоб код виконував роботи більш налаштовано
-L - Liskov substitution principle - поліморфізм
-I - interface segregation principle - принцип розділення інтерфейсу
-D - dependency inversion principle - принцип інверсії залежностей
-
-*/
+console.log('code working')
