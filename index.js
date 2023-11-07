@@ -141,6 +141,31 @@ class LinkedList {
         }
         return arr;
     }
+
+    deleteItem(value) {
+        if (this.head.data === value) {
+            return this.shift();
+        }
+        if (this.tail.data === value) {
+            return this.pop();
+        }
+
+        for (const item of this) {
+           if (item.data === value){
+            /*
+            const prevElem = item.prev;
+            const nextElem = item.next;
+            prevElem.next = nextElem;
+            nextElem.prev = prevElem;
+            */
+           item.prev.next = item.next;
+           item.next.prev = item.prev;
+           this.length--;
+            return item;
+           }
+        }
+        return null;
+    }
     
     [Symbol.iterator]() {
         return new LinkedListIterator(this);
