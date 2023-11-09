@@ -1,279 +1,57 @@
-/* Складність алгоритмів  */
+/*  Stack  */
 
 
-/*
-Алгоритм - кінцева послідовність дій (яка колись закінчиться), яка направлена на вирішення задачі та отримання результату.
-*/
+// Last in - first out
 
-/*
-f(x) = 1; - констатний графік (теж лінійна, але не змінюється)
+class Stack {
+    constructor(maxSize, ...arr){
+        this._maxSize = maxSize;
+        this._size = 0;
+        /*
+        При створенні нового стеку можна передавати будь-яку кількість елементів
 
-f(x) = x;   - лінійний графік
-x = 0; y = 0;
-x = 1; y = 1;
-x = 2; y = 2;
-
-
-f(x) = x^2; - парабола (або квадратичний графік)
-x = 1; y = 1;
-x = 2; y = 4;
-x = 3; y = 9;
-x = 4; y = 16;
-x = 5; y = 25;
-x = 6; y = 36;
-x = 7; y = 49;
-
-
-f(x) = 2^x; - експоненційна
-x = 1; y = 1;
-x = 2; y = 4;
-x = 3; y = 8;
-x = 4; y = 16;
-x = 5; y = 32;
-x = 6; y = 64;
-x = 7; y = 128;
-
-
-f(x) = log x; - логаріфмічний графік
-x = 1; y = 0;
-x = 2; y = 1;
-x = 4; y = 2;
-x = 8; y = 3;
-
-f(x) = x!
-x = 1; y = 1;
-x = 2; y = 2;
-x = 3; y = 6;
-x = 4; y = 24;
-x = 5; y = 120;
-x = 6; y = 720;
-x = 7; y = 5040;
-
-
-f(x) = x^2 + 1; -- константа 1 може бути проігнорована
-
-O(n)
-
-*/
-
-
-function linearSearch(arr, value) {   /// O(n)
-    for (const elem of arr) {
-        if (elem === value) {
-            return elem
-        }
+        */
+       for (const item of arr) {
+            this.push(item)
+       }
     }
-    return null
-}
 
-const arr = [9, 2, 8, 3, 7, 4, 5, 6, 2, 1, 12, 13, 11, 22, 14]; 
-
-/*
-Скільки кроків (операцій) буде робити браузер, якщо ми будемо шукати число 14 - 15
-Скільки кроків (операцій) буде робити браузер, якщо ми будемо шукати число 9 - 1
-
-Кількість кроків = кількості вхідних даних
-O(n) 
-
-*/
-
-
-                       
-function getMultyTable(dimension) {
-    for (let i = 1; i <= dimension; i++) {
-        for (let j = 1; j <= dimension; j++) {
-            console.log(`${i} * ${j} = ${i*j}`);
-            
-        } 
+    get size() {
+        return this._size;
     }
-}
 
-/*
-
-1*1 = 1
-1*2 = 2
-
-....
-5*1 = 5
-5*2 = 10
-...
-*/
-
-/*
-f(x) = x**2;
-
-x = 1; y = 1;
-x = 2; y = 4;
-x = 3; y = 9;
-x = 4; y = 16;
-
-*/
-
-/*
-function binarySearch(array, value) {
-    debugger;
-    let arr = [...array];
-   while(arr.length > 1) {
-        let middle = Math.round((arr.length - 1) / 2);
-        if (arr[middle] === value) {
-            return middle;
-        }
-        if (arr[middle] > value) {
-            // відмести праву половину масива
-            arr = arr.slice(0, middle);
-        } else {
-            // відмести ліву половину масива
-            arr = arr.slice(middle);
-        }
+    get isEmpty() {
+        return this._size === 0;
     }
-}
-*/
 
-function recursiveBinary(arr, value) {
+    push(value) {
+        /// потрібно перевірити, чи не досягли ми максимального розміру
+        if (this._size >= this._maxSize) {
+            throw new RangeError('Stack overflow')
+        }
+        this[`_${this._size}`] = value;
+        this._size++;
+        return this._size;
+    }
 
-        let middle = Math.round((arr.length - 1) / 2);
-        if (arr[middle] === value) {  // база рекурсії №1
-            return middle;
+    pop(){
+        // метод, який дістає (і видаляє ) останній елемент стеку
+        if (this._size <= 0) {
+            return
         }
-        if (arr.length <= 1 && arr[middle] !== value) {  // база рекурсії №2
-            return null;
-        }
-        if (arr[middle] > value) {
-            // відмести праву половину масива
-            return recursiveBinary(arr.slice(0, middle), value);
-        } else {
-            // відмести ліву половину масива
-            const resRight = recursiveBinary(arr.slice(middle), value);
+        const lastItem = this[`_${this._size - 1}`];
+        delete this[`_${this._size - 1}`];
+        this._size--;
+        return lastItem;
+    }
 
-            return resRight ? middle + resRight : null;
-        }
+    pick() {
+        /// повертає значення останнього елементу, не видаляючи його зі стеку
+        return this[`_${this._size - 1}`];
+    }
 
 }
 
-const arr2 = [1, 2, 3, 4, 5, 6, 8, 9, 10];
-
-/*
-Переписати binarySearch на рекурсивний вигляд
-
-*/
 
 
-
-
-/*
-1. Прийняти відсортовану колекцію та значення, яке ми шукаємо
-2. "відкрити книгу на середині" - знайти середину колекції та порівняти з питомим значенням. 
-    Якщо ми знайшли, що шукали - повернути і завершити роботу.
-3. Якщо питомий елемент більше ніж середина - ліву половину відметаємо.
-    Якщо питомий елемент менше ніж середина - праву половину відметаємо.
-4. Повторити дію 2-3
-
-
-Повернути індекс елемента або -1
-
-
-10 елементів = 3 ітерації
-100 елементів = 7 ітерацій
-
-*/
-
-
-
-/*
-Масив  
-Додавання (вставка) в масив - O(n) - лінійна швидкість
-Видалення з масиву - О(n)
-
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].push(11)
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-
-10 елементів = 10 кроків
-100 елементів = 100 кроків
-1ярд = 1ярд кроків
-
-Отримання за індексом - O(1)
-Пошук елементу в масиву - лінійний - O(n)
-                        - бінарний - O(log n)
-
-------
-
-
-Зв'язаний список
-Додавання (вставка) елементу в список - O(1) - константа швидкість
-Видалення - O(1)
-
-10 елементів = 1 крок
-100 елементів = 1 крок
-
-Індекса немає - швидкість визначити неможливо
-Пошук елементу - O(n)
-
-*/
-
-
-
-/// Сортування
-
-
- function bubbleSort(arr) { // квадратична швидкість - O(n^2)
-    for (let j=0; j < arr.length; j++) {
-        for (let i = 0; i < (arr.length - 1 - i); i++) {
-            if (arr[i-1] > arr[i]){
-                // поміняти місцями елементи
-                let temporary = arr[i-1];
-                arr[i-1] = arr[i];
-                arr[i] = temporary;
-            }
-        }
-    }
-    
-    return arr
- }
-
-
- /*
-Кількість кроків bubbleSort
-O(1/2 n)*O(n) = O(1/2 * n * n) = O(1/2) * O(n^2)
-
-
- */
-
-
-/*
-(divide and conquer)
-
-QuickSort (алгоритм Хоара) - полягає в тому, щоби розділювати задачу рекурсивно, поки вона не стане подільною
-
-Базовий випадок рекурсії:
-- якщо масив складається з 1 елемента, то сортувати його не треба
-- якщо масив складається з 3 і більше елементів
-        1. Обрати опорний елемент (pivot)
-        2. В ліву частину перемістити елементи, які менше опорного
-        3. В праву частину перемістити елементи, які більше опорного
-- якщо елементів багато - розділити задачу і рекурсивно виконати п.2
-*/
-const arr3 = [5, 1, 2, 8, 3, 9, 4, 10, 11];
-
-function quickSort(arr) {
-    if (arr.length <= 1) {
-        return arr;
-    }
-
-    let pivotIndex = Math.round((arr.length - 1) / 2);
-    let pivot = arr[pivotIndex];
-    const less = [];
-    const great = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (i === pivotIndex) {
-            continue;
-        }
-        if (arr[i] < pivot) {
-            less.push(arr[i])
-        } else {
-            great.push(arr[i]);
-        }
-        
-    }
-    let res = [...quickSort(less), pivot, ...quickSort(great)];
-    return res;
-}
+const stack = new Stack(3);
