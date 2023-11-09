@@ -1,140 +1,81 @@
-/*  Stack  */
+/*  Черга (Queue) */
+/* First in - first out */
 
-
-// Last in - first out
-
-class Stack {
-    constructor(maxSize, ...arr){
-        this._maxSize = maxSize;
-        this._size = 0;
-        /*
-        При створенні нового стеку можна передавати будь-яку кількість елементів
-
-        */
-       for (const item of arr) {
-            this.push(item)
-       }
+class Queue {
+    constructor(...args){
+        this._head = 0;
+        this._tail = 0;
+        for (const el of args) {
+            this.enqueue(el);
+        }
     }
 
     get size() {
-        return this._size;
+        return this._tail - this._head;
     }
 
-    get isEmpty() {
-        return this._size === 0;
+
+    enqueue(value) {
+        this[this._tail] = value;
+        this._tail++;
+        return this.size;
     }
 
-    push(value) {
-        /// потрібно перевірити, чи не досягли ми максимального розміру
-        if (this._size >= this._maxSize) {
-            throw new RangeError('Stack overflow')
+    dequeue(){
+        /// якщо черга не порожня
+
+        if (this.size === 0) {
+            return;
         }
-        this[`_${this._size}`] = value;
-        this._size++;
-        return this._size;
+
+        const firstElem = this[this._head];
+        delete this[this._head];
+        this._head++;
+        return firstElem;
     }
 
-    pop(){
-        // метод, який дістає (і видаляє ) останній елемент стеку
-        if (this._size <= 0) {
-            return
-        }
-        const lastItem = this[`_${this._size - 1}`];
-        delete this[`_${this._size - 1}`];
-        this._size--;
-        return lastItem;
+    front() {
+        // подивитись значення першого елемента в черзі
+        return this[this._head]
     }
 
-    pick() {
-        /// повертає значення останнього елементу, не видаляючи його зі стеку
-        return this[`_${this._size - 1}`];
+    empty() {
+        // перевірити, чи порожня черга
+        return this.size === 0;
     }
-
 }
-
-
-
-const stack = new Stack(3);
-
 
 
 /*
-()({})   -- true 
-[(]}(]]]]  -- false
-)
-
-Написати функцію, яка приймає рядок, що містить дужки і повертає true, якщо дужки відкриваються-закриваються в правильному порядку і false, якщо це не так
-
-(((())(((
-
-Декомпозиція задачі:
-
-1. Прийняти рядок, створити новий стек
-2. Пройтися циклом по рядку, який ми отримали на вхід
-3. Проаналізувати кожен наступний символ рядка, який ми перебираємо
-    - це дужка, що відкривається
-            --> тоді додаємо її в стек
-    - це дужка, яка закривається 
-            - видалити останню зі стека
-4. Коли доходимо до кінця рядка - аналізуємо стек. Якщо він пустий - дужки були в правильному порядку, повертаємо true. Якщо не пустий - false
-*/
-
-/* найпростіший варіант рішення
-
-function isSequenceRight(str) {
-    const stack = new Stack(str.length);
-    for (const symb of str) {
-        if (symb === '(') {
-            stack.push(symb);
-        }
-        if(stack.isEmpty) {
-            return false
-        }
-        if(symb === ')' && stack.pick() === '('){
-            stack.pop();
-        }
-    }
-    return stack.isEmpty;
-}
+enqueue - поставити елемент в чергу (запушити в кінець)
+dequeue - забрати елемент з черги (перший)
 
 */
 
-//// Приймаємо ззовні "налаштування" - ті дужки, які нам зараз треба шукати
 
-const brackets = {
-    '(': ')',
-    '{': '}',
-    '[': ']'
-}
+// таски: реалізувати front, empty і додавання елементів в чергу при створенні черги
 
-function isSequenceRight(str, brackets) {
-   
-    const stack = new Stack(str.length);
-    const closeBrackets = Object.values(brackets);
-    for (const symb of str) {
-       if(brackets[symb]) {
-        stack.push(symb);
-        continue;
-       }
-       if (stack.isEmpty && closeBrackets.includes(symb)) {
-        return false;
-       }
-       const lastItemFromStack = stack.pick();
-       const correctCloseBracket = brackets[lastItemFromStack];
-       if (symb === correctCloseBracket) {
-        stack.pop();
-        continue;
-       } 
-       if (closeBrackets.includes(symb)) {
-        return false;
-       }
-       /// якщо дужка перед нами закривається 
-       // (}) ()
+
+/*
+Написати функцію, який приймає і зливає дві черги в одну. Принцип зливання - один елемент з першої, один з другої 
+
+*/
+
+function mergeQueues(q1, q2){
+//    debugger;
+    const result = new Queue();
+    while(q1.size || q2.size){
+        if (q1.size){
+            result.enqueue(q1.dequeue());
+        }
+        if (q2.size){
+            result.enqueue(q2.dequeue());
+        }
+
     }
-
-    return stack.isEmpty;
+    return result;
 }
 
-///// (2+2[{}])
 
-
+const q1 = new Queue(1, 2, 3);
+const q2 = new Queue(5, 6, 7, 9, 10);
