@@ -1,81 +1,63 @@
-/*  Черга (Queue) */
-/* First in - first out */
+/* Map */
 
-class Queue {
-    constructor(...args){
-        this._head = 0;
-        this._tail = 0;
-        for (const el of args) {
-            this.enqueue(el);
-        }
-    }
+/*
+1. Мапа містить пари ключ-значення
+Ключем може бути будь-що
+- String
+- Number
+- Boolean
+- Object
+- Symbol
+- Function
+- Array
 
-    get size() {
-        return this._tail - this._head;
-    }
+2. Ключі унікальні (неможливо мати двох однакових ключів) і зберігаються у тому самому порядку, в якому були додані
 
+*/
+const s = Symbol();
 
-    enqueue(value) {
-        this[this._tail] = value;
-        this._tail++;
-        return this.size;
-    }
-
-    dequeue(){
-        /// якщо черга не порожня
-
-        if (this.size === 0) {
-            return;
-        }
-
-        const firstElem = this[this._head];
-        delete this[this._head];
-        this._head++;
-        return firstElem;
-    }
-
-    front() {
-        // подивитись значення першого елемента в черзі
-        return this[this._head]
-    }
-
-    empty() {
-        // перевірити, чи порожня черга
-        return this.size === 0;
-    }
+const obj = {
+    a: 'value',
+    1: 'v',
+    [Symbol()]: 'ttttt' 
 }
 
 
-/*
-enqueue - поставити елемент в чергу (запушити в кінець)
-dequeue - забрати елемент з черги (перший)
+const mapa = new Map([['stringKey', 'stringValue'], [{}, 'objectValue']]);
 
-*/
-
-
-// таски: реалізувати front, empty і додавання елементів в чергу при створенні черги
-
-
-/*
-Написати функцію, який приймає і зливає дві черги в одну. Принцип зливання - один елемент з першої, один з другої 
-
-*/
-
-function mergeQueues(q1, q2){
-//    debugger;
-    const result = new Queue();
-    while(q1.size || q2.size){
-        if (q1.size){
-            result.enqueue(q1.dequeue());
-        }
-        if (q2.size){
-            result.enqueue(q2.dequeue());
-        }
-
-    }
-    return result;
+const auto = {
+    speed: 150
 }
 
+mapa.set('aaa', 'ttt');
+mapa.set(121, 340);
+mapa.set(true, null);
+mapa.set(auto, 'obj');
+mapa.set(()=>{}, 'function');
 
-const q1 = new Queue(1, 2, 3);
-const q2 = new Queue(5, 6, 7, 9, 10);
+
+mapa.keys();
+/*MapIterator {'stringKey', {…}, 'aaa', 121, true, …}[[Entries]]0: "stringKey"1: Object2: "aaa"3: 1214: true5: Object6: ()=>{}[[Prototype]]: Map Iterator[[IteratorHasMore]]: true[[IteratorIndex]]: 0[[IteratorKind]]: "keys"
+*/
+mapa.values();
+/*
+MapIterator {'stringValue', 'objectValue', 'ttt', 340, null, …}
+*/
+[...mapa.keys()];
+//(7) ['stringKey', {…}, 'aaa', 121, true, {…}, ƒ]
+[...mapa.values()]
+
+
+////  
+
+const vocabulary = new Map([['cat', 'кішка'], ['dog', 'собака'], ['eat', 'їсти'], ['milk', 'молоко'], ['meat', 'м\'ясо']]);
+
+//vocabulary.set()
+
+function translater(str, vocabulary) {
+    const words = str.split(' ');
+    return words.map((word) =>  vocabulary.has(word) ? vocabulary.get(word) : word
+        ).join(' ');
+}
+
+console.log(translater('cat eat milk but dog eat meat', vocabulary));
