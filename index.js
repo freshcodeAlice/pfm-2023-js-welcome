@@ -61,3 +61,88 @@ function translater(str, vocabulary) {
 }
 
 console.log(translater('cat eat milk but dog eat meat', vocabulary));
+
+
+
+const user1 = {
+    firstName: 'John',
+    lastName: 'Snow',
+    age: 20
+}
+
+
+const user2 = {
+    firstName: 'Jane',
+    lastName: 'Doe',
+    age: 18
+}
+
+
+const johnMessage = ['hello', 'how are you?'];
+
+const janeMessage = ['hi', 'im fine'];
+
+
+const userMessagesMap = new Map();
+
+userMessagesMap.set(user1, johnMessage);
+userMessagesMap.set(user2, janeMessage);
+
+
+/*
+Написати функцію, яка приймає два рядка і перевіряє, чи є вони анаграмами, тобто чи можна з літер одного рядка без остатку зробити другий
+
+'rockeit' -> 'torcket'
+'fSdfWERWE'
+
+Декомпозиція задачі:
+1. Пробігтись по кожному слову і порахувати кількість літер в ньому
+2. Порівняти мапи між собою.
+    Якщо у мап різний розмір або за одним ключем різна кількість літер = false
+    якщо мапи однакові за наповненням = true
+
+*/
+
+
+function isAnagramm(str1, str2) {
+    if (str1.length !== str2.length) {
+        return false
+    }
+
+    const map1 = wordToMap(str1.toLowerCase());
+    const map2 = wordToMap(str2.toLowerCase());
+ 
+ 
+
+    if (map1.size !== map2.size) {
+        return false
+    }
+
+    for (const key of map1.keys()) {
+        if(map1.get(key) !== map2.get(key)) {
+            return false
+        }
+    }
+    return true
+}
+
+
+
+
+function wordToMap(str) {
+    const mapStr = new Map();
+    for (const letter of str) {
+        // перевіряємо, чи зустрічали ми цю літеру раніше
+        if (mapStr.has(letter)) {
+            //якщо вже зустрічали - витягти з мапи лічильника разів, скільки вже зустріли і збільшити на 1
+            let counter = mapStr.get(letter);
+            mapStr.set(letter, ++counter);
+
+        } else {
+            // якщо зустріли вперше
+            mapStr.set(letter, 1);
+        }
+    }
+
+    return mapStr
+}
